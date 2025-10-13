@@ -15,6 +15,70 @@
     </div>
   </header>
 
+  <!-- Global Filter Panel -->
+  <section class="global-filter-panel">
+    <div class="filter-header">
+      <h2>🔍 Global Filters</h2>
+      <button class="btn btn-link" (click)="clearFilters()">Clear All</button>
+    </div>
+
+    <div class="filter-controls">
+      <div class="filter-group">
+        <label for="searchTerm">Search:</label>
+        <input
+          id="searchTerm"
+          type="text"
+          [(ngModel)]="globalFilterValue.searchTerm"
+          (ngModelChange)="onGlobalFilterChange()"
+          placeholder="Search widgets..."
+          class="filter-input">
+      </div>
+
+      <div class="filter-group">
+        <label for="category">Category:</label>
+        <select
+          id="category"
+          [(ngModel)]="globalFilterValue.category"
+          (ngModelChange)="onGlobalFilterChange()"
+          class="filter-select">
+          <option *ngFor="let cat of filterCategories" [value]="cat === 'All' ? '' : cat">
+            {{ cat }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="startDate">Start Date:</label>
+        <input
+          id="startDate"
+          type="date"
+          [(ngModel)]="globalFilterValue.dateRange.start"
+          (ngModelChange)="onGlobalFilterChange()"
+          class="filter-input">
+      </div>
+
+      <div class="filter-group">
+        <label for="endDate">End Date:</label>
+        <input
+          id="endDate"
+          type="date"
+          [(ngModel)]="globalFilterValue.dateRange.end"
+          (ngModelChange)="onGlobalFilterChange()"
+          class="filter-input">
+      </div>
+
+      <div class="filter-group checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="globalFilterValue.showInactive"
+            (ngModelChange)="onGlobalFilterChange()">
+          Show Inactive Items
+        </label>
+      </div>
+    </div>
+  </section>
+
   <div class="demo-content">
     <!-- Sidebar with draggable widgets -->
     <aside class="sidebar" *ngIf="mode === 'edit'">
@@ -58,13 +122,14 @@
         [mode]="mode"
         [widgets]="widgets"
         [options]="gridStackOptions"
+        [globalFilterValue]="globalFilterValue"
         (onChange)="onLayoutChange($event)"
         (onDragStop)="onDragStop($event)"
         (onResizeStop)="onResizeStop($event)"
         (onRemoved)="onWidgetRemoved($event)">
       </app-grid-stack>
 
-      <div class="grid-info" *ngIf="widgets.length === 0">
+      <!-- <div class="grid-info" *ngIf="widgets.length === 0">
         <div class="empty-state">
           <div class="empty-icon">📋</div>
           <h3>No widgets yet</h3>
@@ -75,7 +140,7 @@
             Switch to Edit Mode to add widgets.
           </p>
         </div>
-      </div>
+      </div> -->
     </main>
   </div>
 

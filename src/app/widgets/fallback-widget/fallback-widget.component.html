@@ -1,0 +1,28 @@
+<div class="fallback-widget">
+  <div class="widget-header">
+    <h3 class="widget-title">⚠️ Widget Not Found</h3>
+    <div class="widget-actions" *ngIf="mode === 'edit'">
+      <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <div class="widget-content">
+    <div class="error-info">
+      <p><strong>Component:</strong> {{ widget.component }}</p>
+      <p><strong>Widget ID:</strong> {{ widget.id }}</p>
+      <p><strong>Display Name:</strong> {{ widget.displayName }}</p>
+    </div>
+
+    <div class="help-text">
+      <p>This widget component was not found in the widget registry.</p>
+      <p *ngIf="mode === 'edit'">Please check:</p>
+      <ul *ngIf="mode === 'edit'">
+        <li>Component is registered in <code>widget-registry.ts</code></li>
+        <li>Component key matches exactly</li>
+        <li>Component is properly imported</li>
+      </ul>
+    </div>
+  </div>
+</div>

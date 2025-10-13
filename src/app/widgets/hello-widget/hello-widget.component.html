@@ -1,6 +1,10 @@
-<div class="hello-widget">
+<div class="hello-widget" [class.filtered-out]="!isVisible">
   <div class="widget-header">
-    <h3 class="widget-title">{{ greeting }}</h3>
+    <div class="widget-title-section">
+      <h3 class="widget-title">{{ greeting }}</h3>
+      <div class="debug-info">{{ debugInfo }}</div>
+      <div class="filter-status-header">{{ headerFilterStatus }}</div>
+    </div>
     <div class="widget-actions" *ngIf="mode === 'edit'">
       <button class="btn-icon" (click)="onZoomInClick()" title="Zoom In">
         &#128269;
@@ -12,10 +16,25 @@
   </div>
 
   <div class="widget-content">
-    <p>This is a simple hello world widget.</p>
-    <p><strong>Widget ID:</strong> {{ widget.id }}</p>
-    <p><strong>Component:</strong> {{ widget.component }}</p>
-    <p><strong>Mode:</strong> {{ mode }}</p>
+    <!-- Filter status display -->
+    <div class="filter-status" *ngIf="filterMessage">
+      <div class="filter-indicator" [class.match]="isVisible" [class.no-match]="!isVisible">
+        {{ filterMessage }}
+      </div>
+    </div>
+
+    <div class="content-section" [class.dimmed]="!isVisible">
+      <p>This is a simple hello world widget.</p>
+      <p><strong>Widget ID:</strong> {{ widget.id }}</p>
+      <p><strong>Component:</strong> {{ widget.component }}</p>
+      <p><strong>Mode:</strong> {{ mode }}</p>
+    </div>
+
+    <!-- Global filter info display -->
+    <div class="filter-info">
+      <h4>🔍 Current Global Filters:</h4>
+      <p class="filter-details">{{ filterInfo }}</p>
+    </div>
 
     <div class="widget-info" *ngIf="mode === 'edit'">
       <p class="info-text">

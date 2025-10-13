@@ -148,6 +148,14 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['mode']) {
+      this.onModeChange(changes['mode']);
+    }
+
+    if (changes['options'] && !changes['options'].firstChange) {
+      this.onOptionsChange(changes['options']);
+    }
+
     if (changes['widgets']) {
       this.rerenderWidgets();
     }
@@ -160,6 +168,85 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initialGridStack();
     this.checkEmpty();
+  }
+
+  /**
+   * Handle mode changes (edit <-> view)
+   * Updates GridStack options to enable/disable drag and resize
+   */
+  private onModeChange(change: SimpleChange): void {
+    if (!this._initialized || !this.gridStack) {
+      return;
+    }
+
+    const isEditMode = change.currentValue === 'edit';
+
+    this.zone.runOutsideAngular(() => {
+      // Update GridStack options based on mode
+      this.gridStack!.setStatic(!isEditMode);
+
+      // Update individual widget properties
+      if (isEditMode) {
+        this.gridStack!.enableMove(true);
+        this.gridStack!.enableResize(true);
+      } else {
+        this.gridStack!.enableMove(false);
+        this.gridStack!.enableResize(false);
+      }
+    });
+
+    // Update widget modes
+    this.updateWidgetModes(change.currentValue);
+
+    // Recalculate background (only shown in edit mode)
+    this.calculateBackgroundSize();
+  }
+
+  /**
+   * Update all widget modes when parent mode changes
+   * Propagates the mode change to all widget wrapper components
+   */
+  private updateWidgetModes(mode: 'edit' | 'view'): void {
+    if (!this.gridStack) {
+      return;
+    }
+
+    const gridItems = this.gridStack.getGridItems();
+    if (!gridItems?.length) {
+      return;
+    }
+
+    gridItems.forEach((item: GridStackWidgetNativeElement) => {
+      const widgetWrapperComponentRef = item.gridStackWidgetComponent?.widgetComponentRef;
+      if (widgetWrapperComponentRef) {
+        widgetWrapperComponentRef.setInput('mode', mode);
+      }
+    });
+  }
+
+  /**
+   * Handle options changes
+   * Updates GridStack configuration when options input changes
+   */
+  private onOptionsChange(change: SimpleChange): void {
+    if (!this._initialized || !this.gridStack) {
+      return;
+    }
+
+    const newOptions = change.currentValue as GridStackOptions;
+
+    this.zone.runOutsideAngular(() => {
+      // Update GridStack options
+      if (newOptions.disableDrag !== undefined) {
+        this.gridStack!.enableMove(!newOptions.disableDrag);
+      }
+      if (newOptions.disableResize !== undefined) {
+        this.gridStack!.enableResize(!newOptions.disableResize);
+      }
+      if (newOptions.acceptWidgets !== undefined) {
+        this.gridStack!.setStatic(newOptions.disableDrag === true);
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -183,15 +270,13 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
       return;
     }
 
+    // Set the global addRemoveCB handler for GridStack
+    // This must be set before calling GridStack.init()
+    GridStack.addRemoveCB = addOrRemoveWidgetHandler;
+
     // Run GridStack initialization outside Angular zone for better performance
     this.zone.runOutsideAngular(() => {
-      // Add the widget creation handler to options
-      const optionsWithHandler = {
-        ...this._options,
-        addRemoveCB: addOrRemoveWidgetHandler
-      };
-
-      this._gridStack = GridStack.init(optionsWithHandler, this.nativeElement);
+      this._gridStack = GridStack.init(this._options, this.nativeElement);
 
       if (this._gridStack) {
         // Register all GridStack event handlers
@@ -386,6 +471,9 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   /**
    * Calculate and apply background grid pattern for edit mode
    * Creates a visual grid that matches the 12-column layout
+   *
+   * Note: This matches the reference implementation from mfe.custom-page
+   * Uses simple division (width / 12) with background-position offset in CSS
    */
   private calculateBackgroundSize(): void {
     this.zone.runOutsideAngular(() => {

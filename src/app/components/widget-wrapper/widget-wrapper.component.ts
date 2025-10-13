@@ -20,6 +20,7 @@ import { BaseWidgetComponent, isOnGlobalFilterChanges } from '../../base/base-wi
 import { GridWidget } from '../../models';
 import { GRID_STACK_WIDGET_CONFIG_TOKEN, GLOBAL_FILTER_VALUE_TOKEN } from '../../tokens/grid-stack-widget-config.token';
 import { WIDGET_REGISTRY } from '../../widgets/widget-registry';
+import { FallbackWidgetComponent } from '../../widgets/fallback-widget/fallback-widget.component';
 
 /**
  * Extended GridItemHTMLElement with reference to WidgetWrapperComponent
@@ -169,14 +170,14 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   private getWidgetContentComponent(): Promise<Type<BaseWidgetComponent>> {
     return new Promise((resolve) => {
       if (!this.gridWidgetOption?.data) {
-        resolve(this.getFallbackComponent());
+        resolve(FallbackWidgetComponent);
         return;
       }
 
       const { component } = this.gridWidgetOption.data;
 
       if (!component) {
-        resolve(this.getFallbackComponent());
+        resolve(FallbackWidgetComponent);
         return;
       }
 
@@ -188,47 +189,9 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
       } else {
         // Widget not found, use fallback
         console.warn(`Widget component '${component}' not found in registry. Using fallback.`);
-        resolve(this.getFallbackComponent());
+        resolve(FallbackWidgetComponent);
       }
     });
   }
 
-  /**
-   * Get the fallback component
-   * Returns a simple placeholder component when the requested widget is not found
-   */
-  private getFallbackComponent(): Type<BaseWidgetComponent> {
-    // For now, we'll return a simple inline component
-    // In a real app, you'd create a dedicated FallbackWidgetComponent
-    @Component({
-      selector: 'app-fallback-widget',
-      standalone: true,
-      template: `
-        <div class="fallback-widget">
-          <h3>Widget Not Found</h3>
-          <p>Component: {{ widget.component }}</p>
-        </div>
-      `,
-      styles: [`
-        .fallback-widget {
-          padding: 20px;
-          text-align: center;
-          color: #999;
-
-          h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-          }
-
-          p {
-            margin: 0;
-            font-size: 0.9rem;
-          }
-        }
-      `]
-    })
-    class FallbackWidgetComponent extends BaseWidgetComponent {}
-
-    return FallbackWidgetComponent;
-  }
 }

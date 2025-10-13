@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { GridStackComponent } from '../../components/grid-stack/grid-stack.component';
 import { DraggableWidgetDirective } from '../../directives/draggable-widget.directive';
 import { gridStackEditModeOptions, gridStackViewModeOptions } from '../../config/grid-stack-options';
-import { GridWidget, WidgetPrototype } from '../../models';
+import { GridWidget, WidgetPrototype, GlobalFilterValue } from '../../models';
 
 /**
  * Demo page component
@@ -17,7 +18,7 @@ import { GridWidget, WidgetPrototype } from '../../models';
 @Component({
   selector: 'app-demo',
   standalone: true,
-  imports: [CommonModule, GridStackComponent, DraggableWidgetDirective],
+  imports: [CommonModule, FormsModule, GridStackComponent, DraggableWidgetDirective],
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss']
 })
@@ -31,6 +32,19 @@ export class DemoComponent {
    * Current widget layout
    */
   widgets: GridWidget[] = [];
+
+  /**
+   * Global filter values shared across all widgets
+   */
+  globalFilterValue: GlobalFilterValue = {
+    searchTerm: '',
+    dateRange: {
+      start: '',
+      end: ''
+    },
+    category: '',
+    showInactive: true
+  };
 
   /**
    * GridStack options (switches based on mode)
@@ -68,6 +82,18 @@ export class DemoComponent {
       icon: '📊'
     },
     {
+      id: 'data-1',
+      name: 'data-widget',
+      displayName: 'Data Table Widget',
+      type: 'data',
+      component: 'DataWidgetComponent',
+      defaultWidth: 8,
+      defaultHeight: 4,
+      minWidth: 4,
+      minHeight: 3,
+      icon: '📋'
+    },
+    {
       id: 'hello-2',
       name: 'hello-widget-2',
       displayName: 'Another Hello',
@@ -84,6 +110,42 @@ export class DemoComponent {
 
   constructor() {
     this.loadLayout();
+    
+    // If no layout is loaded, add a sample layout for testing
+    if (this.widgets.length === 0) {
+      this.addSampleLayout();
+    }
+  }
+
+  /**
+   * Handle global filter changes
+   * Updates the global filter value which propagates to all widgets
+   */
+  onGlobalFilterChange(): void {
+    console.log('Global filter changed:', this.globalFilterValue);
+    // The filter value is automatically passed to widgets via the grid-stack component
+  }
+
+  /**
+   * Clear all filters
+   */
+  clearFilters(): void {
+    this.globalFilterValue = {
+      searchTerm: '',
+      dateRange: {
+        start: '',
+        end: ''
+      },
+      category: '',
+      showInactive: true
+    };
+  }
+
+  /**
+   * Get available categories for filter dropdown
+   */
+  get filterCategories(): string[] {
+    return ['All', 'Sales', 'Marketing', 'Development', 'Support'];
   }
 
   /**

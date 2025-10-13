@@ -39,7 +39,20 @@ export interface WidgetPrototype {
 }
 
 /**
- * Global filter value type
+ * Date range filter interface
+ */
+export interface DateRange {
+  start?: string;
+  end?: string;
+}
+
+/**
+ * Global filter value interface
  * Used to propagate filter values across all widgets
  */
-export type GlobalFilterValue = Record<string, unknown>;
+export interface GlobalFilterValue {
+  searchTerm?: string;
+  dateRange?: DateRange;
+  category?: string;
+  showInactive?: boolean;
+}

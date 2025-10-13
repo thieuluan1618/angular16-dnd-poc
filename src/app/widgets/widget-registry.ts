@@ -42,6 +42,7 @@ export interface WidgetRegistryEntry {
  */
 import { HelloWidgetComponent } from './hello-widget/hello-widget.component';
 import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
+import { DataWidgetComponent } from './data-widget/data-widget.component';
 
 export const WIDGET_REGISTRY: WidgetRegistryEntry[] = [
   {
@@ -53,5 +54,10 @@ export const WIDGET_REGISTRY: WidgetRegistryEntry[] = [
     key: 'ChartWidgetComponent',
     component: ChartWidgetComponent,
     displayName: 'Chart Widget'
+  },
+  {
+    key: 'DataWidgetComponent',
+    component: DataWidgetComponent,
+    displayName: 'Data Table Widget'
   }
 ];

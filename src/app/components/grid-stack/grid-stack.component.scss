@@ -8,6 +8,8 @@
   &.edit {
     background-color: #fafafa;
     // Background grid pattern will be set dynamically via TypeScript
+    // Offset background to align with GridStack margins
+    background-position: -8px 8px;
   }
 }
 
@@ -70,6 +72,11 @@
     .grid-stack-item {
       .grid-stack-item-content {
         cursor: default;
+      }
+
+      // Hide resize handles in view mode
+      .ui-resizable-handle {
+        display: none !important;
       }
     }
   }

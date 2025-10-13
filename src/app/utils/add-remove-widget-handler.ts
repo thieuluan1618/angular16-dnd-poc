@@ -22,6 +22,8 @@ export function addOrRemoveWidgetHandler(
   isAdding: boolean,
   isGrid: boolean
 ): HTMLElement | undefined {
+  console.log('[addOrRemoveWidgetHandler] Called:', { isAdding, isGrid, widget: gridStackWidget });
+
   if (isAdding) {
     return addGridStackWidgetHandler(host, gridStackWidget, isGrid);
   }
