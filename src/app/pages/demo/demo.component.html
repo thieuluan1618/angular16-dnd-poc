@@ -1,0 +1,99 @@
+<div class="demo-container">
+  <!-- Header -->
+  <header class="demo-header">
+    <h1>🎯 Angular 16 Drag & Drop Widget System</h1>
+    <div class="header-actions">
+      <button class="btn btn-secondary" (click)="clearLayout()">
+        🗑️ Clear Layout
+      </button>
+      <button class="btn btn-secondary" (click)="addSampleLayout()">
+        ✨ Add Sample Layout
+      </button>
+      <button class="btn btn-primary" (click)="toggleMode()">
+        {{ mode === 'edit' ? '👁️ View Mode' : '✏️ Edit Mode' }}
+      </button>
+    </div>
+  </header>
+
+  <div class="demo-content">
+    <!-- Sidebar with draggable widgets -->
+    <aside class="sidebar" *ngIf="mode === 'edit'">
+      <div class="sidebar-header">
+        <h2>📦 Available Widgets</h2>
+        <p class="sidebar-subtitle">Drag to add</p>
+      </div>
+
+      <div class="widget-list">
+        <div
+          *ngFor="let widget of widgetPrototypes"
+          class="widget-item draggable-widget"
+          [class.enabled]="!widget.disabled"
+          [class.disabled]="widget.disabled"
+          [appDraggableWidget]
+          [disabled]="widget.disabled"
+          [widget]="widget">
+          <div class="widget-icon">{{ widget.icon }}</div>
+          <div class="widget-info">
+            <div class="widget-name">{{ widget.displayName }}</div>
+            <div class="widget-size">{{ widget.defaultWidth }}x{{ widget.defaultHeight }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <p class="help-text">
+          💡 <strong>Tip:</strong> Drag widgets onto the grid to add them. Resize from corners and edges.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main grid area -->
+    <main class="main-content">
+      <div class="grid-header">
+        <h3>{{ mode === 'edit' ? '✏️ Edit Mode' : '👁️ View Mode' }}</h3>
+        <span class="widget-count">{{ widgets.length }} widgets</span>
+      </div>
+
+      <app-grid-stack
+        [mode]="mode"
+        [widgets]="widgets"
+        [options]="gridStackOptions"
+        (onChange)="onLayoutChange($event)"
+        (onDragStop)="onDragStop($event)"
+        (onResizeStop)="onResizeStop($event)"
+        (onRemoved)="onWidgetRemoved($event)">
+      </app-grid-stack>
+
+      <div class="grid-info" *ngIf="widgets.length === 0">
+        <div class="empty-state">
+          <div class="empty-icon">📋</div>
+          <h3>No widgets yet</h3>
+          <p *ngIf="mode === 'edit'">
+            Drag widgets from the sidebar to get started, or click "Add Sample Layout" above.
+          </p>
+          <p *ngIf="mode === 'view'">
+            Switch to Edit Mode to add widgets.
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer info -->
+  <footer class="demo-footer">
+    <div class="footer-content">
+      <div class="info-item">
+        <strong>GridStack:</strong> v10.3.1
+      </div>
+      <div class="info-item">
+        <strong>Angular:</strong> v16.2.0
+      </div>
+      <div class="info-item">
+        <strong>Pattern:</strong> Standalone Components + inject()
+      </div>
+      <div class="info-item">
+        <strong>Storage:</strong> localStorage
+      </div>
+    </div>
+  </footer>
+</div>

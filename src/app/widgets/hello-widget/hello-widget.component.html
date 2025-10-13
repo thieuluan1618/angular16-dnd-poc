@@ -1,0 +1,26 @@
+<div class="hello-widget">
+  <div class="widget-header">
+    <h3 class="widget-title">{{ greeting }}</h3>
+    <div class="widget-actions" *ngIf="mode === 'edit'">
+      <button class="btn-icon" (click)="onZoomInClick()" title="Zoom In">
+        &#128269;
+      </button>
+      <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <div class="widget-content">
+    <p>This is a simple hello world widget.</p>
+    <p><strong>Widget ID:</strong> {{ widget.id }}</p>
+    <p><strong>Component:</strong> {{ widget.component }}</p>
+    <p><strong>Mode:</strong> {{ mode }}</p>
+
+    <div class="widget-info" *ngIf="mode === 'edit'">
+      <p class="info-text">
+        📝 You can drag to move, resize from corners, or click remove to delete this widget.
+      </p>
+    </div>
+  </div>
+</div>

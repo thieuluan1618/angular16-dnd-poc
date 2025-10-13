@@ -1,0 +1,35 @@
+<div class="chart-widget">
+  <div class="widget-header">
+    <h3 class="widget-title">{{ widget.displayName }}</h3>
+    <div class="widget-actions" *ngIf="mode === 'edit'">
+      <button class="btn-icon" (click)="onSettingsClick()" title="Settings">
+        &#9881;
+      </button>
+      <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <div class="widget-content">
+    <div class="chart-container">
+      <div class="chart-bars">
+        <div
+          class="chart-bar"
+          *ngFor="let item of chartData"
+          [style.height.%]="getBarHeight(item.value)">
+          <div class="bar-value">{{ item.value }}</div>
+        </div>
+      </div>
+      <div class="chart-labels">
+        <div class="chart-label" *ngFor="let item of chartData">
+          {{ item.label }}
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-info" *ngIf="mode === 'view'">
+      <p>Sample data visualization</p>
+    </div>
+  </div>
+</div>

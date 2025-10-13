@@ -1,0 +1,9 @@
+<!-- Container for dynamically created widget components -->
+<ng-template #container></ng-template>
+
+<!-- Empty state message (shown when no widgets exist in edit mode) -->
+<div class="empty-state" *ngIf="isEmpty && mode === 'edit'">
+  <div class="empty-state-content">
+    <p>Drag and drop widgets here to get started</p>
+  </div>
+</div>

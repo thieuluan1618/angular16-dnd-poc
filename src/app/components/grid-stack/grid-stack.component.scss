@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+
+  // Edit mode styling
+  &.edit {
+    background-color: #fafafa;
+    // Background grid pattern will be set dynamically via TypeScript
+  }
+}
+
+// Empty state styling
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 0;
+
+  .empty-state-content {
+    color: #999;
+    font-size: 1.2rem;
+    font-weight: 300;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+// GridStack item overrides
+:host ::ng-deep {
+  .grid-stack-item {
+    .grid-stack-item-content {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Edit mode specific styles
+  &.edit {
+    .grid-stack-item {
+      .grid-stack-item-content {
+        cursor: move;
+      }
+
+      // Resize handle styles
+      .ui-resizable-handle {
+        background: transparent;
+      }
+
+      &:hover {
+        .grid-stack-item-content {
+          border-color: #2196F3;
+          box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+      }
+    }
+  }
+
+  // View mode - no interaction
+  &:not(.edit) {
+    .grid-stack-item {
+      .grid-stack-item-content {
+        cursor: default;
+      }
+    }
+  }
+}
