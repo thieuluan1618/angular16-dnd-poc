@@ -250,15 +250,34 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Observe container size changes to update background grid
+    // Observe container size changes to update background grid and recalculate cellHeight
     const resizeObserver = new ResizeObserver(() => {
       this.calculateBackgroundSize();
+      this.updateCellHeight();
     });
     resizeObserver.observe(this.elementRef.nativeElement);
 
     // Cleanup observer on destroy
     this.destroyRef.onDestroy(() => {
       resizeObserver.disconnect();
+    });
+  }
+
+  /**
+   * Update cellHeight dynamically when container size changes
+   * Ensures cells remain proportional after window resize
+   */
+  private updateCellHeight(): void {
+    if (!this.gridStack) {
+      return;
+    }
+
+    this.zone.runOutsideAngular(() => {
+      const containerWidth = this.elementRef.nativeElement.clientWidth;
+      const columnWidth = containerWidth / 12;
+
+      // Update GridStack's cellHeight
+      this.gridStack.cellHeight(columnWidth - 8);
     });
   }
 
@@ -270,13 +289,26 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
       return;
     }
 
+    // Calculate dynamic cellHeight based on container width
+    const containerWidth = this.elementRef.nativeElement.clientWidth;
+    const columnWidth = containerWidth / 12;
+
+    // Set cellHeight to match column width (accounting for margins will be handled by GridStack)
+    const dynamicCellHeight = columnWidth; // Subtract margin to account for spacing
+
+    // Override the cellHeight with calculated value
+    const optionsWithDynamicHeight = {
+      ...this._options,
+      cellHeight: dynamicCellHeight
+    };
+
     // Set the global addRemoveCB handler for GridStack
     // This must be set before calling GridStack.init()
     GridStack.addRemoveCB = addOrRemoveWidgetHandler;
 
     // Run GridStack initialization outside Angular zone for better performance
     this.zone.runOutsideAngular(() => {
-      this._gridStack = GridStack.init(this._options, this.nativeElement);
+      this._gridStack = GridStack.init(optionsWithDynamicHeight, this.nativeElement);
 
       if (this._gridStack) {
         // Register all GridStack event handlers
@@ -471,16 +503,12 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   /**
    * Calculate and apply background grid pattern for edit mode
    * Creates a visual grid that matches the 12-column layout
-   *
-   * Note: This matches the reference implementation from mfe.custom-page
-   * Uses simple division (width / 12) with background-position offset in CSS
    */
   private calculateBackgroundSize(): void {
     this.zone.runOutsideAngular(() => {
       if (this.elementRef.nativeElement && this.isEditMode) {
         const width = this.elementRef.nativeElement.clientWidth;
-        const padding = 0;
-        const size = (width - padding) / 12;
+        const size = width / 12;
         const bgSize = `${size}px ${size}px`;
         const bgImage = `linear-gradient(90deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 16px, rgba(232, 232, 232, 0) 16px, rgba(232, 232, 232, 0) ${size}px), linear-gradient(0deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 16px, rgba(232, 232, 232, 0) 16px, rgba(232, 232, 232, 0) ${size}px)`;
         this.elementRef.nativeElement.style.setProperty('background-size', bgSize);

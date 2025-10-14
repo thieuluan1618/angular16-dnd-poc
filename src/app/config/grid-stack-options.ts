@@ -16,7 +16,7 @@ export const gridStackEditModeOptions: GridStackOptions = {
   marginRight: 8,
   marginUnit: 'px',
   cellHeight: 'auto',
-  float: false,
+  float: true,
   disableDrag: false,
   disableResize: false,
   resizable: {
@@ -42,7 +42,7 @@ export const gridStackViewModeOptions: GridStackOptions = {
   marginRight: 8,
   marginUnit: 'px',
   cellHeight: 'auto',
-  float: false,
+  float: true,
   disableDrag: true,
   disableResize: true,
   acceptWidgets: false,

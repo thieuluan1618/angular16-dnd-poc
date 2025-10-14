@@ -11,6 +11,13 @@
     // Offset background to align with GridStack margins
     background-position: -8px 8px;
   }
+
+  // View mode - no background grid
+  &:not(.edit) {
+    background: none !important;
+    background-image: none !important;
+    background-color: transparent !important;
+  }
 }
 
 // Empty state styling
