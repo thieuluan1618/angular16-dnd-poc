@@ -70,12 +70,14 @@
     display: flex;
     gap: 20px;
     align-items: flex-end;
+    flex-direction: row-reverse;
     flex-wrap: wrap;
 
     .filter-group {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
 
       label {
         font-size: 0.85rem;
@@ -169,7 +171,7 @@
 .demo-content {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow: auto; // Allow scrolling when grid expands
 }
 
 // Sidebar
@@ -279,7 +281,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto; // Allow vertical scrolling when grid expands
   padding: 20px;
 
   .grid-header {
@@ -308,7 +310,7 @@
   app-grid-stack {
     flex: 1;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible; // Allow grid to expand vertically
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
