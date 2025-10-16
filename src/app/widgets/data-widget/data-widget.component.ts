@@ -140,40 +140,61 @@ export class DataWidgetComponent extends BaseWidgetComponent implements OnInit {
   private applyFilters(): void {
     let filtered = [...this.allData];
 
-    // Apply search filter
-    const searchTerm = this.globalFilterValue.searchTerm?.toLowerCase();
-    if (searchTerm) {
-      filtered = filtered.filter(item =>
-        item.name.toLowerCase().includes(searchTerm) ||
-        item.description.toLowerCase().includes(searchTerm) ||
-        item.category.toLowerCase().includes(searchTerm)
-      );
+    // Apply date filter (dateFilter: last-12-months, last-6-months, etc.)
+    const dateFilter = this.globalFilterValue.dateFilter;
+    if (dateFilter && dateFilter !== 'custom') {
+      const now = new Date();
+      let monthsToSubtract = 0;
+
+      switch (dateFilter) {
+        case 'last-month':
+          monthsToSubtract = 1;
+          break;
+        case 'last-3-months':
+          monthsToSubtract = 3;
+          break;
+        case 'last-6-months':
+          monthsToSubtract = 6;
+          break;
+        case 'last-12-months':
+          monthsToSubtract = 12;
+          break;
+      }
+
+      if (monthsToSubtract > 0) {
+        const cutoffDate = new Date();
+        cutoffDate.setMonth(now.getMonth() - monthsToSubtract);
+
+        filtered = filtered.filter(item => {
+          const itemDate = new Date(item.createdDate);
+          return itemDate >= cutoffDate;
+        });
+      }
     }
 
-    // Apply category filter
-    const category = this.globalFilterValue.category;
-    if (category && category !== 'All') {
-      filtered = filtered.filter(item => item.category === category);
+    // Apply custom date range filter if custom is selected
+    if (dateFilter === 'custom') {
+      const dateRange = this.globalFilterValue.dateRange;
+      if (dateRange?.start || dateRange?.end) {
+        filtered = filtered.filter(item => {
+          const itemDate = new Date(item.createdDate);
+          const startDate = dateRange.start ? new Date(dateRange.start) : null;
+          const endDate = dateRange.end ? new Date(dateRange.end) : null;
+
+          if (startDate && itemDate < startDate) return false;
+          if (endDate && itemDate > endDate) return false;
+
+          return true;
+        });
+      }
     }
 
-    // Apply date range filter
-    const dateRange = this.globalFilterValue.dateRange;
-    if (dateRange?.start || dateRange?.end) {
-      filtered = filtered.filter(item => {
-        const itemDate = new Date(item.createdDate);
-        const startDate = dateRange.start ? new Date(dateRange.start) : null;
-        const endDate = dateRange.end ? new Date(dateRange.end) : null;
-
-        if (startDate && itemDate < startDate) return false;
-        if (endDate && itemDate > endDate) return false;
-        
-        return true;
-      });
-    }
-
-    // Apply inactive filter
-    if (!this.globalFilterValue.showInactive) {
-      filtered = filtered.filter(item => item.status === 'active');
+    // Trending filter can be used for sorting or grouping
+    // (For now, we just acknowledge it exists)
+    const trending = this.globalFilterValue.trending;
+    if (trending) {
+      console.log(`Trending filter applied: ${trending}`);
+      // In a real app, this might sort by trend data
     }
 
     this.filteredData = filtered;
@@ -203,11 +224,9 @@ export class DataWidgetComponent extends BaseWidgetComponent implements OnInit {
    */
   get headerFilterStatus(): string {
     const activeFilters = [];
-    if (this.globalFilterValue.searchTerm) activeFilters.push('Search');
-    if (this.globalFilterValue.category) activeFilters.push('Category');
-    if (this.globalFilterValue.dateRange?.start || this.globalFilterValue.dateRange?.end) activeFilters.push('Date');
-    if (this.globalFilterValue.showInactive !== undefined) activeFilters.push('Status');
-    
+    if (this.globalFilterValue.dateFilter) activeFilters.push('Date');
+    if (this.globalFilterValue.trending) activeFilters.push('Trending');
+
     const showing = `Showing: ${this.filteredData.length}/${this.allData.length}`;
     return activeFilters.length > 0 ? `${showing} | Filters: ${activeFilters.join(', ')}` : showing;
   }
@@ -218,22 +237,24 @@ export class DataWidgetComponent extends BaseWidgetComponent implements OnInit {
   get filterSummary(): string {
     const parts: string[] = [];
 
-    if (this.globalFilterValue.searchTerm) {
-      parts.push(`search: "${this.globalFilterValue.searchTerm}"`);
+    if (this.globalFilterValue.dateFilter) {
+      const dateLabels: Record<string, string> = {
+        'last-month': 'Last month',
+        'last-3-months': 'Last 3 months',
+        'last-6-months': 'Last 6 months',
+        'last-12-months': 'Last 12 months',
+        'custom': 'Custom range'
+      };
+      parts.push(`date: ${dateLabels[this.globalFilterValue.dateFilter] || this.globalFilterValue.dateFilter}`);
     }
 
-    if (this.globalFilterValue.category) {
-      parts.push(`category: ${this.globalFilterValue.category}`);
-    }
-
-    if (this.globalFilterValue.dateRange?.start || this.globalFilterValue.dateRange?.end) {
-      const start = this.globalFilterValue.dateRange?.start || '∞';
-      const end = this.globalFilterValue.dateRange?.end || '∞';
-      parts.push(`date: ${start} to ${end}`);
-    }
-
-    if (!this.globalFilterValue.showInactive) {
-      parts.push('active only');
+    if (this.globalFilterValue.trending) {
+      const trendingLabels: Record<string, string> = {
+        'daily': 'Daily trend',
+        'weekly': 'Weekly trend',
+        'monthly': 'Monthly trend'
+      };
+      parts.push(`trending: ${trendingLabels[this.globalFilterValue.trending] || this.globalFilterValue.trending}`);
     }
 
     return parts.length > 0 ? parts.join(', ') : 'No filters applied';

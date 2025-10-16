@@ -51,8 +51,7 @@ export interface DateRange {
  * Used to propagate filter values across all widgets
  */
 export interface GlobalFilterValue {
-  searchTerm?: string;
+  dateFilter?: string;
+  trending?: string;
   dateRange?: DateRange;
-  category?: string;
-  showInactive?: boolean;
 }

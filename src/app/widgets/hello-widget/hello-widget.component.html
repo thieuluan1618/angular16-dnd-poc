@@ -2,13 +2,10 @@
   <div class="widget-header">
     <div class="widget-title-section">
       <h3 class="widget-title">{{ greeting }}</h3>
-      <div class="debug-info">{{ debugInfo }}</div>
-      <div class="filter-status-header">{{ headerFilterStatus }}</div>
+      <!-- <div class="debug-info">{{ debugInfo }}</div> -->
+      <!-- <div class="filter-status-header">{{ headerFilterStatus }}</div> -->
     </div>
     <div class="widget-actions" *ngIf="mode === 'edit'">
-      <button class="btn-icon" (click)="onZoomInClick()" title="Zoom In">
-        &#128269;
-      </button>
       <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
         &times;
       </button>

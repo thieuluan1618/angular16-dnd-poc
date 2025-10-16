@@ -1,7 +1,7 @@
 <div class="demo-container">
   <!-- Header -->
   <header class="demo-header">
-    <h1>🎯 Angular 16 Drag & Drop Widget System</h1>
+    <h1>PX Dashboard</h1>
     <div class="header-actions">
       <button class="btn btn-secondary" (click)="clearLayout()">
         🗑️ Clear Layout
@@ -17,64 +17,37 @@
 
   <!-- Global Filter Panel -->
   <section class="global-filter-panel">
-    <div class="filter-header">
-      <h2>🔍 Global Filters</h2>
-      <button class="btn btn-link" (click)="clearFilters()">Clear All</button>
-    </div>
-
     <div class="filter-controls">
       <div class="filter-group">
-        <label for="searchTerm">Search:</label>
-        <input
-          id="searchTerm"
-          type="text"
-          [(ngModel)]="globalFilterValue.searchTerm"
-          (ngModelChange)="onGlobalFilterChange()"
-          placeholder="Search widgets..."
-          class="filter-input">
-      </div>
-
-      <div class="filter-group">
-        <label for="category">Category:</label>
+        <label for="dateFilter">Date:</label>
         <select
-          id="category"
-          [(ngModel)]="globalFilterValue.category"
+          id="dateFilter"
+          [(ngModel)]="globalFilterValue.dateFilter"
           (ngModelChange)="onGlobalFilterChange()"
-          class="filter-select">
-          <option *ngFor="let cat of filterCategories" [value]="cat === 'All' ? '' : cat">
-            {{ cat }}
-          </option>
+          class="filter-select"
+        >
+          <option value="">All</option>
+          <option value="last-12-months">Last 12 months</option>
+          <option value="last-6-months">Last 6 months</option>
+          <option value="last-3-months">Last 3 months</option>
+          <option value="last-month">Last month</option>
+          <option value="custom">Custom range</option>
         </select>
       </div>
 
       <div class="filter-group">
-        <label for="startDate">Start Date:</label>
-        <input
-          id="startDate"
-          type="date"
-          [(ngModel)]="globalFilterValue.dateRange.start"
+        <label for="trending">Trending:</label>
+        <select
+          id="trending"
+          [(ngModel)]="globalFilterValue.trending"
           (ngModelChange)="onGlobalFilterChange()"
-          class="filter-input">
-      </div>
-
-      <div class="filter-group">
-        <label for="endDate">End Date:</label>
-        <input
-          id="endDate"
-          type="date"
-          [(ngModel)]="globalFilterValue.dateRange.end"
-          (ngModelChange)="onGlobalFilterChange()"
-          class="filter-input">
-      </div>
-
-      <div class="filter-group checkbox-group">
-        <label>
-          <input
-            type="checkbox"
-            [(ngModel)]="globalFilterValue.showInactive"
-            (ngModelChange)="onGlobalFilterChange()">
-          Show Inactive Items
-        </label>
+          class="filter-select"
+        >
+          <option value="">All</option>
+          <option value="monthly">Monthly trend</option>
+          <option value="weekly">Weekly trend</option>
+          <option value="daily">Daily trend</option>
+        </select>
       </div>
     </div>
   </section>

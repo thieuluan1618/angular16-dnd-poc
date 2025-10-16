@@ -37,13 +37,12 @@ export class DemoComponent {
    * Global filter values shared across all widgets
    */
   globalFilterValue: GlobalFilterValue = {
-    searchTerm: '',
+    dateFilter: '',
+    trending: '',
     dateRange: {
       start: '',
       end: ''
-    },
-    category: '',
-    showInactive: true
+    }
   };
 
   /**
@@ -92,25 +91,12 @@ export class DemoComponent {
       minWidth: 4,
       minHeight: 3,
       icon: '📋'
-    },
-    {
-      id: 'hello-2',
-      name: 'hello-widget-2',
-      displayName: 'Another Hello',
-      type: 'hello',
-      component: 'HelloWidgetComponent',
-      defaultWidth: 3,
-      defaultHeight: 2,
-      minWidth: 2,
-      minHeight: 1,
-      icon: '👋',
-      disabled: false
     }
   ];
 
   constructor() {
     this.loadLayout();
-    
+
     // If no layout is loaded, add a sample layout for testing
     if (this.widgets.length === 0) {
       this.addSampleLayout();
@@ -131,21 +117,13 @@ export class DemoComponent {
    */
   clearFilters(): void {
     this.globalFilterValue = {
-      searchTerm: '',
+      dateFilter: '',
+      trending: '',
       dateRange: {
         start: '',
         end: ''
-      },
-      category: '',
-      showInactive: true
+      }
     };
-  }
-
-  /**
-   * Get available categories for filter dropdown
-   */
-  get filterCategories(): string[] {
-    return ['All', 'Sales', 'Marketing', 'Development', 'Support'];
   }
 
   /**
@@ -198,41 +176,43 @@ export class DemoComponent {
 
   /**
    * Add a sample layout for demonstration
+   * Creates a dashboard with chart and data widgets to showcase PX Dashboard
    */
   addSampleLayout(): void {
     this.widgets = [
+      // Top row: Two chart widgets
       {
         x: 0,
-        y: 0,
-        w: 4,
-        h: 2,
-        mode: this.mode,
-        data: {
-          id: 'sample-hello-1',
-          instanceId: 'inst-1',
-          name: 'hello-widget',
-          displayName: 'Sample Hello Widget',
-          type: 'hello',
-          component: 'HelloWidgetComponent',
-          defaultWidth: 4,
-          defaultHeight: 2,
-          minWidth: 2,
-          minHeight: 1,
-          properties: {},
-          instanceProperties: {}
-        }
-      },
-      {
-        x: 4,
         y: 0,
         w: 6,
         h: 3,
         mode: this.mode,
         data: {
           id: 'sample-chart-1',
+          instanceId: 'inst-1',
+          name: 'chart-widget',
+          displayName: 'Hello Widget',
+          type: 'chart',
+          component: 'HelloWidgetComponent',
+          defaultWidth: 6,
+          defaultHeight: 3,
+          minWidth: 3,
+          minHeight: 2,
+          properties: {},
+          instanceProperties: {}
+        }
+      },
+      {
+        x: 6,
+        y: 0,
+        w: 6,
+        h: 3,
+        mode: this.mode,
+        data: {
+          id: 'sample-chart-2',
           instanceId: 'inst-2',
           name: 'chart-widget',
-          displayName: 'Sample Chart Widget',
+          displayName: 'Trending Analysis',
           type: 'chart',
           component: 'ChartWidgetComponent',
           defaultWidth: 6,
@@ -243,20 +223,43 @@ export class DemoComponent {
           instanceProperties: {}
         }
       },
+      // Middle row: Data table widget
       {
         x: 0,
-        y: 2,
-        w: 3,
+        y: 3,
+        w: 12,
+        h: 4,
+        mode: this.mode,
+        data: {
+          id: 'sample-data-1',
+          instanceId: 'inst-3',
+          name: 'data-widget',
+          displayName: 'Data Overview',
+          type: 'data',
+          component: 'DataWidgetComponent',
+          defaultWidth: 12,
+          defaultHeight: 4,
+          minWidth: 4,
+          minHeight: 3,
+          properties: {},
+          instanceProperties: {}
+        }
+      },
+      // Bottom row: Hello widget for status/info
+      {
+        x: 0,
+        y: 7,
+        w: 4,
         h: 2,
         mode: this.mode,
         data: {
-          id: 'sample-hello-2',
-          instanceId: 'inst-3',
+          id: 'sample-hello-1',
+          instanceId: 'inst-4',
           name: 'hello-widget',
-          displayName: 'Another Sample',
+          displayName: 'Welcome',
           type: 'hello',
           component: 'HelloWidgetComponent',
-          defaultWidth: 3,
+          defaultWidth: 4,
           defaultHeight: 2,
           minWidth: 2,
           minHeight: 1,

@@ -43,14 +43,18 @@ yarn watch
 ```
 src/
 ├── app/
+│   ├── base/                    # Base widget class
 │   ├── components/
 │   │   ├── grid-stack/          # Main GridStack container (standalone)
-│   │   ├── widget-wrapper/      # Individual widget wrapper
-│   │   └── draggable/           # Draggable directive
+│   │   └── widget-wrapper/      # Individual widget wrapper
+│   ├── directives/              # Directives (including draggable-widget)
 │   ├── models/                  # TypeScript interfaces
-│   ├── services/                # Angular services
-│   ├── app.component.*          # Root component
-│   └── app-routing.module.ts    # Routing configuration
+│   ├── pages/                   # Page components (demo)
+│   ├── tokens/                  # DI tokens for widget configuration
+│   ├── utils/                   # Utility functions
+│   ├── widgets/                 # Widget implementations (hello, chart, data, fallback)
+│   ├── app.component.*          # Root component (standalone)
+│   └── app.config.ts            # App configuration
 ├── assets/                      # Static assets
 └── styles.scss                  # Global styles (includes GridStack CSS)
 ```
@@ -164,7 +168,7 @@ Wraps individual widget instances:
 
 ### 3. Draggable Directive
 
-**Location:** `src/app/components/draggable/`
+**Location:** `src/app/directives/`
 
 Makes sidebar widgets draggable:
 - Uses GridStack's `setupDragIn()` API
@@ -182,6 +186,7 @@ Core TypeScript interfaces:
 - `GridWidget` - Extends GridStackWidget with custom data
 - `Widget` - Base widget interface
 - `WidgetPrototype` - Widget template/blueprint
+- `GlobalFilterValue` - Global filter values (dateFilter, trending, dateRange)
 - Event types (WidgetTitleChangeEvent, WidgetSettingsChangeEvent)
 
 **Reference:** `../mfe.custom-page/src/modules/common/grid-stack/grid-stack-widget.ts`
@@ -218,6 +223,72 @@ const gridStackViewOptions: GridStackOptions = {
 ```
 
 **Reference:** `../mfe.custom-page/src/modules/custom-page/constants/grid-stack-options.ts`
+
+## Global Filtering System
+
+This POC implements a global filtering system that propagates filter values across all widgets.
+
+### Filter Interface
+
+```typescript
+export interface GlobalFilterValue {
+  dateFilter?: string;      // 'last-12-months', 'last-6-months', 'last-3-months', 'last-month', 'custom'
+  trending?: string;        // 'monthly', 'weekly', 'daily'
+  dateRange?: DateRange;    // Custom date range (start/end)
+}
+```
+
+### Filter Options
+
+**Date Filter:**
+- All (no filter)
+- Last 12 months
+- Last 6 months
+- Last 3 months
+- Last month
+- Custom range (uses dateRange.start/end)
+
+**Trending Filter:**
+- All (no filter)
+- Monthly trend
+- Weekly trend
+- Daily trend
+
+### How Filters Work
+
+1. **Filter Panel** - Located in `demo.component.html`, displays two dropdowns for Date and Trending filters
+2. **Filter Propagation** - Changes to `globalFilterValue` are passed to GridStack component via `[globalFilterValue]` input
+3. **Widget Reception** - GridStack propagates filters to all widget instances via the `onGlobalFilterChanges()` method
+4. **Widget Implementation** - Each widget can implement `onGlobalFilterChanges()` to respond to filter updates
+
+### Implementing Filters in Widgets
+
+To make a widget respond to global filters:
+
+```typescript
+export class MyWidgetComponent extends BaseWidgetComponent {
+  onGlobalFilterChanges(change: SimpleChange): void {
+    const { dateFilter, trending } = change.currentValue;
+
+    // Apply date filter
+    if (dateFilter === 'last-12-months') {
+      // Filter data to last 12 months
+    }
+
+    // Apply trending filter
+    if (trending === 'monthly') {
+      // Sort/group by monthly trend
+    }
+  }
+}
+```
+
+### Example Implementation
+
+See `data-widget.component.ts` for a complete example of date filtering logic that:
+- Filters data based on predefined date ranges (last X months)
+- Supports custom date ranges
+- Updates filter statistics and display
 
 ## Implementation Guidelines
 
@@ -275,15 +346,27 @@ const gridStackViewOptions: GridStackOptions = {
 - GridStack has its own type definitions
 - Import types from 'gridstack': `import { GridStack, GridStackOptions } from 'gridstack';`
 
-## Next Steps for Implementation
+## Implementation Status
 
-1. Create models and interfaces (`src/app/models/`)
-2. Implement GridStack container component (`src/app/components/grid-stack/`)
-3. Implement widget wrapper component (`src/app/components/widget-wrapper/`)
-4. Create draggable directive (`src/app/components/draggable/`)
-5. Create example widgets for testing
-6. Test edit and view modes
-7. Add styling and polish
+✅ **Completed:**
+
+1. Models and interfaces (`src/app/models/`)
+2. GridStack container component (`src/app/components/grid-stack/`)
+3. Widget wrapper component (`src/app/components/widget-wrapper/`)
+4. Draggable directive (`src/app/directives/draggable-widget.directive.ts`)
+5. Example widgets for testing (hello, chart, data, fallback)
+6. Edit and view modes working
+7. Demo page with sidebar and widget gallery (PX Dashboard)
+8. Global filtering system (Date and Trending filters)
+
+**Next Steps for Enhancement:**
+
+- Add more widget types as needed
+- Implement state persistence (localStorage/backend)
+- Add widget configuration/settings UI
+- Implement NgRx for state management (if complexity grows)
+- Add comprehensive unit and integration tests
+- Add Module Federation support (if needed for micro-frontends)
 
 ## Additional Notes
 

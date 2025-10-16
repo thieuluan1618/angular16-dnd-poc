@@ -28,12 +28,11 @@ export class HelloWidgetComponent extends BaseWidgetComponent {
    * Get greeting message based on mode
    */
   get greeting(): string {
-    const searchMatch = this.checkSearchMatch();
-    const baseGreeting = this.mode === 'edit' 
-      ? `Hello ${this.widget.displayName} (Edit Mode)` 
+    const baseGreeting = this.mode === 'edit'
+      ? `Hello ${this.widget.displayName} (Edit Mode)`
       : `Hello ${this.widget.displayName}`;
-    
-    return searchMatch ? `🔍 ${baseGreeting}` : baseGreeting;
+
+    return baseGreeting;
   }
 
   /**
@@ -48,11 +47,9 @@ export class HelloWidgetComponent extends BaseWidgetComponent {
    */
   get headerFilterStatus(): string {
     const activeFilters = [];
-    if (this.globalFilterValue.searchTerm) activeFilters.push('Search');
-    if (this.globalFilterValue.category) activeFilters.push('Category');
-    if (this.globalFilterValue.dateRange?.start || this.globalFilterValue.dateRange?.end) activeFilters.push('Date');
-    if (this.globalFilterValue.showInactive !== undefined) activeFilters.push('Status');
-    
+    if (this.globalFilterValue.dateFilter) activeFilters.push('Date');
+    if (this.globalFilterValue.trending) activeFilters.push('Trending');
+
     return activeFilters.length > 0 ? `Filters: ${activeFilters.join(', ')}` : 'No Filters';
   }
 
@@ -61,41 +58,28 @@ export class HelloWidgetComponent extends BaseWidgetComponent {
    */
   get filterInfo(): string {
     const filters: string[] = [];
-    
-    if (this.globalFilterValue.searchTerm) {
-      filters.push(`Search: "${this.globalFilterValue.searchTerm}"`);
+
+    if (this.globalFilterValue.dateFilter) {
+      const dateLabels: Record<string, string> = {
+        'last-month': 'Last month',
+        'last-3-months': 'Last 3 months',
+        'last-6-months': 'Last 6 months',
+        'last-12-months': 'Last 12 months',
+        'custom': 'Custom range'
+      };
+      filters.push(`Date: ${dateLabels[this.globalFilterValue.dateFilter] || this.globalFilterValue.dateFilter}`);
     }
-    
-    if (this.globalFilterValue.category) {
-      filters.push(`Category: ${this.globalFilterValue.category}`);
-    }
-    
-    if (this.globalFilterValue.dateRange?.start || this.globalFilterValue.dateRange?.end) {
-      const start = this.globalFilterValue.dateRange?.start || 'N/A';
-      const end = this.globalFilterValue.dateRange?.end || 'N/A';
-      filters.push(`Date: ${start} to ${end}`);
+
+    if (this.globalFilterValue.trending) {
+      const trendingLabels: Record<string, string> = {
+        'daily': 'Daily trend',
+        'weekly': 'Weekly trend',
+        'monthly': 'Monthly trend'
+      };
+      filters.push(`Trending: ${trendingLabels[this.globalFilterValue.trending] || this.globalFilterValue.trending}`);
     }
 
     return filters.length > 0 ? filters.join(' | ') : 'No active filters';
-  }
-
-  /**
-   * Check if widget content matches search term
-   */
-  private checkSearchMatch(): boolean {
-    const searchTerm = this.globalFilterValue.searchTerm?.toLowerCase();
-    if (!searchTerm) return false;
-    
-    const searchableText = [
-      this.widget.displayName,
-      this.widget.name,
-      this.widget.type,
-      'hello',
-      'greeting',
-      'sample'
-    ].join(' ').toLowerCase();
-    
-    return searchableText.includes(searchTerm);
   }
 
   /**
@@ -104,28 +88,15 @@ export class HelloWidgetComponent extends BaseWidgetComponent {
    */
   onGlobalFilterChanges(change: { previousValue: GlobalFilterValue; currentValue: GlobalFilterValue; firstChange: boolean }): void {
     console.log('Hello widget received filter change:', change);
-    
-    // Apply search filter
-    const searchTerm = change.currentValue.searchTerm?.toLowerCase();
-    if (searchTerm) {
-      this.isVisible = this.checkSearchMatch();
-      this.filterMessage = this.isVisible 
-        ? `Matches search: "${searchTerm}"` 
-        : `No match for: "${searchTerm}"`;
-    } else {
-      this.isVisible = true;
-      this.filterMessage = '';
-    }
 
-    // Apply category filter (simulate widget having categories)
-    const category = change.currentValue.category;
-    if (category && category !== 'All') {
-      // Simulate this widget belonging to 'Development' category
-      const widgetCategory = 'Development';
-      this.isVisible = this.isVisible && (category === widgetCategory);
-      if (category !== widgetCategory) {
-        this.filterMessage = `Filtered out by category: ${category} (this widget is ${widgetCategory})`;
-      }
+    // Update visibility based on filter (always visible for now)
+    this.isVisible = true;
+
+    // Build filter message
+    if (change.currentValue.dateFilter || change.currentValue.trending) {
+      this.filterMessage = `Filters applied: ${this.filterInfo}`;
+    } else {
+      this.filterMessage = '';
     }
   }
 
