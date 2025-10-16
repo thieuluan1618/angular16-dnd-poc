@@ -478,6 +478,8 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
         y,
         w,
         h,
+        minW: widget.minWidth,
+        minH: widget.minHeight,
         mode: 'edit',
         data: widget,
       };

@@ -186,6 +186,8 @@ export class DemoComponent {
         y: 0,
         w: 6,
         h: 3,
+        minW: 3,
+        minH: 2,
         mode: this.mode,
         data: {
           id: 'sample-chart-1',
@@ -207,6 +209,8 @@ export class DemoComponent {
         y: 0,
         w: 6,
         h: 3,
+        minW: 3,
+        minH: 2,
         mode: this.mode,
         data: {
           id: 'sample-chart-2',
@@ -229,6 +233,8 @@ export class DemoComponent {
         y: 3,
         w: 12,
         h: 4,
+        minW: 4,
+        minH: 3,
         mode: this.mode,
         data: {
           id: 'sample-data-1',
@@ -251,6 +257,8 @@ export class DemoComponent {
         y: 7,
         w: 4,
         h: 2,
+        minW: 2,
+        minH: 1,
         mode: this.mode,
         data: {
           id: 'sample-hello-1',
