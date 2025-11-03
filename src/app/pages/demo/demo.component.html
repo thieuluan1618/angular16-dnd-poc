@@ -1,13 +1,19 @@
 <div class="demo-container">
+  <!-- Toast Notifications -->
+  <app-toast-container></app-toast-container>
+
   <!-- Header -->
   <header class="demo-header">
     <h1>PX Dashboard</h1>
     <div class="header-actions">
-      <button class="btn btn-secondary" (click)="clearLayout()">
+      <button class="btn btn-secondary" *ngIf="mode === 'edit'" (click)="clearLayout()">
         🗑️ Clear Layout
       </button>
-      <button class="btn btn-secondary" (click)="addSampleLayout()">
-        ✨ Add Sample Layout
+<!--      <button class="btn btn-secondary" (click)="addSampleLayout()">-->
+<!--        ✨ Add Sample Layout-->
+<!--      </button>-->
+      <button class="btn btn-success" (click)="publishPage()" *ngIf="mode === 'view'">
+        📤 Publish Page
       </button>
       <button class="btn btn-primary" (click)="toggleMode()">
         {{ mode === 'edit' ? '👁️ View Mode' : '✏️ Edit Mode' }}

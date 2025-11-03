@@ -1,0 +1,29 @@
+<div class="hello-mom-widget">
+  <div class="widget-header">
+    <div class="widget-title">{{ greeting }}</div>
+    <div class="widget-actions">
+      <button class="btn-action" title="Zoom In" (click)="onZoomInClick()" *ngIf="mode === 'edit'">
+        <span>🔍</span>
+      </button>
+      <button class="btn-action" title="Remove" (click)="onRemoveClick()" *ngIf="mode === 'edit'">
+        <span>✕</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="widget-content">
+    <div class="greeting-card">
+      <h2>💝 Special Greeting</h2>
+      <p class="message">We hope you have an amazing day, Mom!</p>
+      <p class="submessage">Thank you for everything you do.</p>
+    </div>
+
+    <div *ngIf="filterMessage" class="filter-info">
+      {{ filterMessage }}
+    </div>
+  </div>
+
+  <div class="widget-footer">
+    <small>{{ debugInfo }}</small>
+  </div>
+</div>

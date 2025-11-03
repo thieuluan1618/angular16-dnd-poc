@@ -165,6 +165,15 @@
       background: #e0e0e0;
     }
   }
+
+  &.btn-success {
+    background: #10b981;
+    color: white;
+
+    &:hover {
+      background: #059669;
+    }
+  }
 }
 
 // Content area

@@ -14,11 +14,11 @@
 
   <div class="widget-content">
     <!-- Filter status display -->
-    <div class="filter-status" *ngIf="filterMessage">
-      <div class="filter-indicator" [class.match]="isVisible" [class.no-match]="!isVisible">
-        {{ filterMessage }}
-      </div>
-    </div>
+<!--    <div class="filter-status" *ngIf="filterMessage">-->
+<!--      <div class="filter-indicator" [class.match]="isVisible" [class.no-match]="!isVisible">-->
+<!--        {{ filterMessage }}-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="content-section" [class.dimmed]="!isVisible">
       <p>This is a simple hello world widget.</p>
@@ -28,10 +28,10 @@
     </div>
 
     <!-- Global filter info display -->
-    <div class="filter-info">
-      <h4>🔍 Current Global Filters:</h4>
-      <p class="filter-details">{{ filterInfo }}</p>
-    </div>
+<!--    <div class="filter-info">-->
+<!--      <h4>🔍 Current Global Filters:</h4>-->
+<!--      <p class="filter-details">{{ filterInfo }}</p>-->
+<!--    </div>-->
 
     <div class="widget-info" *ngIf="mode === 'edit'">
       <p class="info-text">

@@ -517,9 +517,6 @@ export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
         const bgImage = `linear-gradient(90deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 16px, rgba(232, 232, 232, 0) 16px, rgba(232, 232, 232, 0) ${size}px), linear-gradient(0deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 16px, rgba(232, 232, 232, 0) 16px, rgba(232, 232, 232, 0) ${size}px)`;
         this.elementRef.nativeElement.style.setProperty('background-size', bgSize);
         this.elementRef.nativeElement.style.setProperty('background-image', bgImage);
-
-        console.log(this.elementRef.nativeElement);
-
         this.cd.detectChanges();
       }
     });

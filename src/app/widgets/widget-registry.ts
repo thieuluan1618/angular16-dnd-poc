@@ -43,12 +43,18 @@ export interface WidgetRegistryEntry {
 import { HelloWidgetComponent } from './hello-widget/hello-widget.component';
 import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
 import { DataWidgetComponent } from './data-widget/data-widget.component';
+import { HelloMomWidgetComponent } from './hello-mom-widget/hello-mom-widget.component';
 
 export const WIDGET_REGISTRY: WidgetRegistryEntry[] = [
   {
     key: 'HelloWidgetComponent',
     component: HelloWidgetComponent,
     displayName: 'Hello World Widget'
+  },
+  {
+    key: 'HelloMomWidgetComponent',
+    component: HelloMomWidgetComponent,
+    displayName: 'Hello Mom Widget'
   },
   {
     key: 'ChartWidgetComponent',

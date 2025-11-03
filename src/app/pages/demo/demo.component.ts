@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GridStackComponent } from '../../components/grid-stack/grid-stack.component';
+import { ToastComponent } from '../../components/toast/toast.component';
 import { DraggableWidgetDirective } from '../../directives/draggable-widget.directive';
 import { gridStackEditModeOptions, gridStackViewModeOptions } from '../../config/grid-stack-options';
 import { GridWidget, WidgetPrototype, GlobalFilterValue } from '../../models';
+import { ToastService } from '../../services/toast.service';
 
 /**
  * Demo page component
@@ -18,11 +20,13 @@ import { GridWidget, WidgetPrototype, GlobalFilterValue } from '../../models';
 @Component({
   selector: 'app-demo',
   standalone: true,
-  imports: [CommonModule, FormsModule, GridStackComponent, DraggableWidgetDirective],
+  imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss']
 })
 export class DemoComponent {
+  private toastService = inject(ToastService);
+
   /**
    * Current display mode
    */
@@ -106,10 +110,12 @@ export class DemoComponent {
   /**
    * Handle global filter changes
    * Updates the global filter value which propagates to all widgets
+   * Important: We need to create a new object reference to trigger Angular's ngOnChanges
    */
   onGlobalFilterChange(): void {
+    // Create a new object reference to trigger change detection in GridStackComponent
+    this.globalFilterValue = { ...this.globalFilterValue };
     console.log('Global filter changed:', this.globalFilterValue);
-    // The filter value is automatically passed to widgets via the grid-stack component
   }
 
   /**
@@ -172,6 +178,27 @@ export class DemoComponent {
       this.widgets = [];
       this.saveLayout();
     }
+  }
+
+  /**
+   * Publish the current page layout
+   * Switches to view mode and shows a success toast notification
+   */
+  publishPage(): void {
+    // Switch to view mode
+    this.mode = 'view';
+
+    // Save the layout
+    this.saveLayout();
+
+    // Show success toast notification
+    this.toastService.success('Page published successfully! 🎉');
+
+    console.log('Page published:', {
+      mode: this.mode,
+      widgets: this.widgets.length,
+      timestamp: new Date().toISOString()
+    });
   }
 
   /**
