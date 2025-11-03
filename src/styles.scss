@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Angular Material Theme */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 /* GridStack CSS - Required for drag-and-drop functionality */
 @import 'gridstack/dist/gridstack.min.css';

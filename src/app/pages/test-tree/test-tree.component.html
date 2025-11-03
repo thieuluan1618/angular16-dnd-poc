@@ -1,0 +1,122 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
+  <div class="max-w-2xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-slate-900 mb-2">Tree Checkbox Component</h1>
+      <p class="text-lg text-slate-600">Testing Angular CDK Tree with Tailwind CSS</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div class="flex flex-wrap gap-4">
+        <button
+          (click)="expandAll()"
+          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+        >
+          Expand All
+        </button>
+        <button
+          (click)="collapseAll()"
+          class="px-4 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors font-medium"
+        >
+          Collapse All
+        </button>
+        <button
+          (click)="onShowChecked()"
+          class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
+        >
+          Show Checked
+        </button>
+      </div>
+    </div>
+
+    <!-- Tree Container -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold text-slate-800 mb-4">Project Structure</h2>
+
+      <!-- CDK Tree -->
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cdk-tree">
+        <mat-nested-tree-node
+          *matTreeNodeDef="let node"
+          [node]="node"
+          class="block mb-2"
+        >
+          <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+            <!-- Expand/Collapse Button -->
+            <button
+              *ngIf="hasChild(0, node)"
+              matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.label"
+              class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              <svg
+                *ngIf="!treeControl.isExpanded(node)"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <svg
+                *ngIf="treeControl.isExpanded(node)"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div *ngIf="!hasChild(0, node)" class="w-6"></div>
+
+            <!-- Checkbox -->
+            <input
+              type="checkbox"
+              [checked]="node.checked"
+              (change)="onNodeToggle(node)"
+              [attr.aria-label]="node.label"
+              class="w-5 h-5 text-blue-500 rounded cursor-pointer hover:text-blue-600 transition-colors"
+            />
+
+            <!-- Label -->
+            <span class="text-slate-700 font-medium flex-1">{{ node.label }}</span>
+
+            <!-- Badge -->
+            <span
+              *ngIf="node.children"
+              class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold"
+            >
+              {{ node.children.length }}
+            </span>
+          </div>
+
+          <!-- Nested Children -->
+          <mat-tree-node-outlet></mat-tree-node-outlet>
+        </mat-nested-tree-node>
+      </mat-tree>
+    </div>
+
+    <!-- Checked Items Summary -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-3">Summary</h3>
+      <p class="text-blue-700 mb-2">
+        <span class="font-bold">{{ getCheckedNodes().length }}</span>
+        item(s) selected
+      </p>
+      <div class="text-sm text-blue-600">
+        <p *ngIf="getCheckedNodes().length === 0">
+          No items selected yet
+        </p>
+        <div *ngIf="getCheckedNodes().length > 0" class="flex flex-wrap gap-2">
+          <span
+            *ngFor="let item of getCheckedNodes()"
+            class="bg-blue-200 text-blue-900 px-3 py-1 rounded-full text-xs font-medium"
+          >
+            {{ item.label }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
