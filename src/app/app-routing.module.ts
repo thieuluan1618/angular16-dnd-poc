@@ -6,12 +6,12 @@ import { Angular21DemoComponent } from './pages/angular21-demo/angular21-demo.co
 import { TailwindDemoComponent } from './pages/tailwind-demo/tailwind-demo.component';
 
 const routes: Routes = [
-  { path: '', component: DemoComponent },
+  { path: '', redirectTo: 'angular21', pathMatch: 'full' },
   { path: 'demo', component: DemoComponent },
   { path: 'signal-forms', component: SignalFormDemoComponent },
   { path: 'angular21', component: Angular21DemoComponent },
   { path: 'tailwind', component: TailwindDemoComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'angular21' }
 ];
 
 @NgModule({
