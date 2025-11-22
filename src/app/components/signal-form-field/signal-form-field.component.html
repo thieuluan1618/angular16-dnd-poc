@@ -1,7 +1,7 @@
-<div [class]="containerClasses()" class="relative mb-8">
+<div [class]="containerClasses()" class="relative mb-5">
   <!-- Field Label -->
   @if (field() && field().label) {
-    <label [for]="field().id" [class]="labelClasses()" class="block text-sm font-medium text-gray-700 mb-2 transition-colors duration-200">
+    <label [for]="field().id" [class]="labelClasses()" class="block text-sm font-medium text-gray-700 mb-1.5 transition-colors duration-200">
       {{ field().label }}
       @if (field().required) {
         <span class="text-red-500 ml-1">*</span>
@@ -15,10 +15,10 @@
       @switch (field().type) {
         @case ('text') {
           <input
-            [id]="field().id"
-            [type]="field().type"
-            [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
+             [id]="field().id"
+             [type]="field().type"
+             [class]="inputClasses()"
+             class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
             [placeholder]="field().placeholder"
             [disabled]="field().disabled()"
             [required]="field().required"
@@ -35,7 +35,7 @@
             [id]="field().id"
             type="email"
             [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
+            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
             [placeholder]="field().placeholder"
             [disabled]="field().disabled()"
             [required]="field().required"
@@ -52,7 +52,7 @@
             [id]="field().id"
             type="password"
             [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
+            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
             [placeholder]="field().placeholder"
             [disabled]="field().disabled()"
             [required]="field().required"
@@ -69,7 +69,7 @@
             [id]="field().id"
             type="number"
             [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
+            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
             [placeholder]="field().placeholder"
             [disabled]="field().disabled()"
             [required]="field().required"
@@ -86,7 +86,7 @@
             [id]="field().id"
             type="date"
             [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
+            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5"
             [disabled]="field().disabled()"
             [required]="field().required"
             [ngModel]="fieldValue"
@@ -101,7 +101,7 @@
           <textarea
             [id]="field().id"
             [class]="inputClasses()"
-            class="w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5 resize-y min-h-[120px]"
+            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5 resize-y min-h-[100px]"
             [placeholder]="field().placeholder"
             [disabled]="field().disabled()"
             [required]="field().required"
@@ -119,7 +119,7 @@
             <select
               [id]="field().id"
               [class]="inputClasses()"
-              class="select-arrow w-full px-5 py-4 border-2 border-gray-200 rounded-xl text-base font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5 cursor-pointer appearance-none pr-12"
+              class="select-arrow w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-medium transition-all duration-300 bg-white text-gray-900 shadow-sm hover:shadow-md hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-500/15 focus:border-blue-500 focus:shadow-lg focus:-translate-y-0.5 cursor-pointer appearance-none pr-10"
               [disabled]="field().disabled()"
               [required]="field().required"
               [ngModel]="fieldValue"
@@ -139,7 +139,7 @@
         }
 
         @case ('checkbox') {
-          <label class="flex items-center cursor-pointer gap-4 p-5 bg-slate-50 border-2 border-gray-200 rounded-xl transition-all duration-300 hover:bg-slate-100 hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5">
+          <label class="flex items-center cursor-pointer gap-3 p-3.5 bg-slate-50 border-2 border-gray-200 rounded-lg transition-all duration-300 hover:bg-slate-100 hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5">
             <input
               [id]="field().id"
               type="checkbox"
@@ -163,9 +163,9 @@
 
   <!-- Validation Errors -->
   @if (showErrors() && errors().length > 0) {
-    <div [id]="field().id + '-error'" class="mt-3 space-y-2" role="alert" aria-live="polite">
+    <div [id]="field().id + '-error'" class="mt-2 space-y-1.5" role="alert" aria-live="polite">
       @for (error of errors(); track $index) {
-        <div class="text-sm text-red-600 leading-relaxed p-3 bg-red-50 border-l-4 border-red-500 rounded-md font-medium animate-slideDown">
+        <div class="text-xs text-red-600 leading-relaxed p-2 bg-red-50 border-l-4 border-red-500 rounded-sm font-medium animate-slideDown">
           {{ error }}
         </div>
       }
