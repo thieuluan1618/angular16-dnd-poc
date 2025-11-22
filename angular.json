@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular16-dnd-poc:build:production"
+              "buildTarget": "angular16-dnd-poc:build:production"
             },
             "development": {
-              "browserTarget": "angular16-dnd-poc:build:development"
+              "buildTarget": "angular16-dnd-poc:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "angular16-dnd-poc:build"
+            "buildTarget": "angular16-dnd-poc:build"
           }
         },
         "test": {
