@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-
+import { Component, signal, computed, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GridStackComponent } from '../../components/grid-stack/grid-stack.component';
 import { ToastComponent } from '../../components/toast/toast.component';
@@ -19,7 +19,8 @@ import { ToastService } from '../../services/toast.service';
  */
 @Component({
     selector: 'app-demo',
-    imports: [FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
+    standalone: true,
+    imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
     templateUrl: './demo.component.html',
     styleUrls: ['./demo.component.scss']
 })
@@ -27,33 +28,33 @@ export class DemoComponent {
   private toastService = inject(ToastService);
 
   /**
-   * Current display mode
+   * Current display mode (signal)
    */
-  mode: 'edit' | 'view' = 'edit';
+  mode = signal<'edit' | 'view'>('edit');
 
   /**
-   * Current widget layout
+   * Current widget layout (signal)
    */
-  widgets: GridWidget[] = [];
+  widgets = signal<GridWidget[]>([]);
 
   /**
-   * Global filter values shared across all widgets
+   * Global filter values shared across all widgets (signal)
    */
-  globalFilterValue: GlobalFilterValue = {
+  globalFilterValue = signal<GlobalFilterValue>({
     dateFilter: '',
     trending: '',
     dateRange: {
       start: '',
       end: ''
     }
-  };
+  });
 
   /**
-   * GridStack options (switches based on mode)
+   * GridStack options (computed - switches based on mode)
    */
-  get gridStackOptions() {
-    return this.mode === 'edit' ? gridStackEditModeOptions : gridStackViewModeOptions;
-  }
+  gridStackOptions = computed(() =>
+    this.mode() === 'edit' ? gridStackEditModeOptions : gridStackViewModeOptions
+  );
 
   /**
    * Available widget prototypes for dragging
@@ -101,41 +102,57 @@ export class DemoComponent {
     this.loadLayout();
 
     // If no layout is loaded, add a sample layout for testing
-    if (this.widgets.length === 0) {
+    if (this.widgets().length === 0) {
       this.addSampleLayout();
     }
   }
 
   /**
+   * Handle date filter change
+   */
+  onDateFilterChange(value: string): void {
+    this.globalFilterValue.update(v => ({ ...v, dateFilter: value }));
+    this.onGlobalFilterChange();
+  }
+
+  /**
+   * Handle trending filter change
+   */
+  onTrendingFilterChange(value: string): void {
+    this.globalFilterValue.update(v => ({ ...v, trending: value }));
+    this.onGlobalFilterChange();
+  }
+
+  /**
    * Handle global filter changes
    * Updates the global filter value which propagates to all widgets
-   * Important: We need to create a new object reference to trigger Angular's ngOnChanges
+   * Important: We need to create a new object reference to trigger change detection
    */
   onGlobalFilterChange(): void {
     // Create a new object reference to trigger change detection in GridStackComponent
-    this.globalFilterValue = { ...this.globalFilterValue };
-    console.log('Global filter changed:', this.globalFilterValue);
+    this.globalFilterValue.set({ ...this.globalFilterValue() });
+    console.log('Global filter changed:', this.globalFilterValue());
   }
 
   /**
    * Clear all filters
    */
   clearFilters(): void {
-    this.globalFilterValue = {
+    this.globalFilterValue.set({
       dateFilter: '',
       trending: '',
       dateRange: {
         start: '',
         end: ''
       }
-    };
+    });
   }
 
   /**
    * Toggle between edit and view modes
    */
   toggleMode(): void {
-    this.mode = this.mode === 'edit' ? 'view' : 'edit';
+    this.mode.update(current => current === 'edit' ? 'view' : 'edit');
   }
 
   /**
@@ -144,7 +161,7 @@ export class DemoComponent {
    */
   onLayoutChange(widgets: GridWidget[]): void {
     console.log('Layout changed:', widgets);
-    this.widgets = widgets;
+    this.widgets.set(widgets);
     this.saveLayout();
   }
 
@@ -174,7 +191,7 @@ export class DemoComponent {
    */
   clearLayout(): void {
     if (confirm('Are you sure you want to clear all widgets?')) {
-      this.widgets = [];
+      this.widgets.set([]);
       this.saveLayout();
     }
   }
@@ -185,7 +202,7 @@ export class DemoComponent {
    */
   publishPage(): void {
     // Switch to view mode
-    this.mode = 'view';
+    this.mode.set('view');
 
     // Save the layout
     this.saveLayout();
@@ -194,8 +211,8 @@ export class DemoComponent {
     this.toastService.success('Page published successfully! 🎉');
 
     console.log('Page published:', {
-      mode: this.mode,
-      widgets: this.widgets.length,
+      mode: this.mode(),
+      widgets: this.widgets().length,
       timestamp: new Date().toISOString()
     });
   }
@@ -205,7 +222,8 @@ export class DemoComponent {
    * Creates a dashboard with chart and data widgets to showcase PX Dashboard
    */
   addSampleLayout(): void {
-    this.widgets = [
+    const currentMode = this.mode();
+    this.widgets.set([
       // Top row: Two chart widgets
       {
         x: 0,
@@ -214,7 +232,7 @@ export class DemoComponent {
         h: 3,
         minW: 3,
         minH: 2,
-        mode: this.mode,
+        mode: currentMode,
         data: {
           id: 'sample-chart-1',
           instanceId: 'inst-1',
@@ -237,7 +255,7 @@ export class DemoComponent {
         h: 3,
         minW: 3,
         minH: 2,
-        mode: this.mode,
+        mode: currentMode,
         data: {
           id: 'sample-chart-2',
           instanceId: 'inst-2',
@@ -261,7 +279,7 @@ export class DemoComponent {
         h: 4,
         minW: 4,
         minH: 3,
-        mode: this.mode,
+        mode: currentMode,
         data: {
           id: 'sample-data-1',
           instanceId: 'inst-3',
@@ -285,7 +303,7 @@ export class DemoComponent {
         h: 2,
         minW: 2,
         minH: 1,
-        mode: this.mode,
+        mode: currentMode,
         data: {
           id: 'sample-hello-1',
           instanceId: 'inst-4',
@@ -301,7 +319,7 @@ export class DemoComponent {
           instanceProperties: {}
         }
       }
-    ];
+    ]);
     this.saveLayout();
   }
 
@@ -310,7 +328,7 @@ export class DemoComponent {
    */
   private saveLayout(): void {
     try {
-      localStorage.setItem('dnd-layout', JSON.stringify(this.widgets));
+      localStorage.setItem('dnd-layout', JSON.stringify(this.widgets()));
     } catch (error) {
       console.error('Failed to save layout:', error);
     }
@@ -323,9 +341,11 @@ export class DemoComponent {
     try {
       const saved = localStorage.getItem('dnd-layout');
       if (saved) {
-        this.widgets = JSON.parse(saved);
+        const loadedWidgets = JSON.parse(saved);
+        const currentMode = this.mode();
         // Update mode for all widgets
-        this.widgets.forEach(w => w.mode = this.mode);
+        loadedWidgets.forEach((w: GridWidget) => w.mode = currentMode);
+        this.widgets.set(loadedWidgets);
       }
     } catch (error) {
       console.error('Failed to load layout:', error);

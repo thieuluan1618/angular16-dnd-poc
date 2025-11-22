@@ -6,24 +6,21 @@
   <header class="demo-header">
     <h1>PX Dashboard</h1>
     <div class="header-actions">
-      @if (mode === 'edit') {
+      @if (mode() === 'edit') {
         <button class="btn btn-secondary" (click)="clearLayout()">
           🗑️ Clear Layout
         </button>
       }
-      <!--      <button class="btn btn-secondary" (click)="addSampleLayout()">-->
-      <!--        ✨ Add Sample Layout-->
-    <!--      </button>-->
-    @if (mode === 'view') {
-      <button class="btn btn-success" (click)="publishPage()">
-        📤 Publish Page
+      @if (mode() === 'view') {
+        <button class="btn btn-success" (click)="publishPage()">
+          📤 Publish Page
+        </button>
+      }
+      <button class="btn btn-primary" (click)="toggleMode()">
+        {{ mode() === 'edit' ? '👁️ View Mode' : '✏️ Edit Mode' }}
       </button>
-    }
-    <button class="btn btn-primary" (click)="toggleMode()">
-      {{ mode === 'edit' ? '👁️ View Mode' : '✏️ Edit Mode' }}
-    </button>
-  </div>
-</header>
+    </div>
+  </header>
 
 <!-- Global Filter Panel -->
 <section class="global-filter-panel">
@@ -32,8 +29,8 @@
       <label for="dateFilter">Date:</label>
       <select
         id="dateFilter"
-        [(ngModel)]="globalFilterValue.dateFilter"
-        (ngModelChange)="onGlobalFilterChange()"
+        [ngModel]="globalFilterValue().dateFilter"
+        (ngModelChange)="onDateFilterChange($event)"
         class="filter-select"
         >
         <option value="">All</option>
@@ -49,8 +46,8 @@
       <label for="trending">Trending:</label>
       <select
         id="trending"
-        [(ngModel)]="globalFilterValue.trending"
-        (ngModelChange)="onGlobalFilterChange()"
+        [ngModel]="globalFilterValue().trending"
+        (ngModelChange)="onTrendingFilterChange($event)"
         class="filter-select"
         >
         <option value="">All</option>
@@ -64,14 +61,14 @@
 
 <div class="demo-content">
   <!-- Sidebar with draggable widgets -->
-  @if (mode === 'edit') {
+  @if (mode() === 'edit') {
     <aside class="sidebar">
       <div class="sidebar-header">
         <h2>📦 Available Widgets</h2>
         <p class="sidebar-subtitle">Drag to add</p>
       </div>
       <div class="widget-list">
-        @for (widget of widgetPrototypes; track widget) {
+        @for (widget of widgetPrototypes; track widget.id) {
           <div
             class="widget-item draggable-widget"
             [class.enabled]="!widget.disabled"
@@ -103,10 +100,10 @@
   </div> -->
 
   <app-grid-stack
-    [mode]="mode"
-    [widgets]="widgets"
-    [options]="gridStackOptions"
-    [globalFilterValue]="globalFilterValue"
+    [mode]="mode()"
+    [widgets]="widgets()"
+    [options]="gridStackOptions()"
+    [globalFilterValue]="globalFilterValue()"
     (onChange)="onLayoutChange($event)"
     (onDragStop)="onDragStop($event)"
     (onResizeStop)="onResizeStop($event)"
@@ -135,10 +132,10 @@
       <strong>GridStack:</strong> v10.3.1
     </div>
     <div class="info-item">
-      <strong>Angular:</strong> v16.2.0
+      <strong>Angular:</strong> v21.0.0
     </div>
     <div class="info-item">
-      <strong>Pattern:</strong> Standalone Components + inject()
+      <strong>Pattern:</strong> Standalone + Signals + Modern Control Flow
     </div>
     <div class="info-item">
       <strong>Storage:</strong> localStorage
