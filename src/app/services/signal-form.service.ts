@@ -44,34 +44,62 @@ export class SignalFormService {
 
     minLength: (min: number, message?: string): SignalValidator<string> => ({
       name: 'minLength',
-      validate: (value: string): ValidationResult => ({
-        isValid: !value || value.length >= min,
-        message: message || `Minimum ${min} characters required`
-      })
+      validate: (value: string): ValidationResult => {
+        // Only validate if value is not empty (required validator handles empty)
+        if (!value) {
+          return { isValid: true };
+        }
+        const isValid = value.length >= min;
+        return {
+          isValid,
+          message: !isValid ? (message || `Minimum ${min} characters required`) : undefined
+        };
+      }
     }),
 
     maxLength: (max: number, message?: string): SignalValidator<string> => ({
       name: 'maxLength',
-      validate: (value: string): ValidationResult => ({
-        isValid: !value || value.length <= max,
-        message: message || `Maximum ${max} characters allowed`
-      })
+      validate: (value: string): ValidationResult => {
+        // Only validate if value is not empty (required validator handles empty)
+        if (!value) {
+          return { isValid: true };
+        }
+        const isValid = value.length <= max;
+        return {
+          isValid,
+          message: !isValid ? (message || `Maximum ${max} characters allowed`) : undefined
+        };
+      }
     }),
 
     min: (min: number, message?: string): SignalValidator<number> => ({
       name: 'min',
-      validate: (value: number): ValidationResult => ({
-        isValid: value === null || value === undefined || value >= min,
-        message: message || `Value must be at least ${min}`
-      })
+      validate: (value: number): ValidationResult => {
+        // Allow null/undefined (required validator handles these)
+        if (value === null || value === undefined) {
+          return { isValid: true };
+        }
+        const isValid = value >= min;
+        return {
+          isValid,
+          message: !isValid ? (message || `Value must be at least ${min}`) : undefined
+        };
+      }
     }),
 
     max: (max: number, message?: string): SignalValidator<number> => ({
       name: 'max',
-      validate: (value: number): ValidationResult => ({
-        isValid: value === null || value === undefined || value <= max,
-        message: message || `Value must be at most ${max}`
-      })
+      validate: (value: number): ValidationResult => {
+        // Allow null/undefined (required validator handles these)
+        if (value === null || value === undefined) {
+          return { isValid: true };
+        }
+        const isValid = value <= max;
+        return {
+          isValid,
+          message: !isValid ? (message || `Value must be at most ${max}`) : undefined
+        };
+      }
     })
   };
 
