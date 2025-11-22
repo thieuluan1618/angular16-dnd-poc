@@ -115,27 +115,27 @@ export class SignalFormFieldComponent {
   /**
    * Handle input value change
    */
-  onValueChange(event: any): void {
+  onValueChange(newValue: any): void {
     const field = this.field();
     if (!field) {
       return; // Skip if field is not yet available
     }
 
-    let newValue: any;
+    let processedValue: any = newValue;
 
     switch (field.type) {
       case 'number':
-        newValue = event.target.value ? Number(event.target.value) : null;
+        processedValue = newValue ? Number(newValue) : null;
         break;
       case 'checkbox':
-        newValue = event.target.checked;
+        processedValue = newValue === true || newValue === 'true';
         break;
       default:
-        newValue = event.target.value;
+        processedValue = newValue;
     }
 
-    field.value.set(newValue);
-    this.valueChange.emit(newValue);
+    field.value.set(processedValue);
+    this.valueChange.emit(processedValue);
   }
 
   /**
