@@ -99,6 +99,20 @@
               />
             }
           </div>
+
+          <!-- Submit Button -->
+          <div class="flex justify-center gap-3 mt-6 pt-4 border-t border-gray-200">
+            <button
+              type="submit"
+              [disabled]="currentForm().isSubmitting()"
+              class="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:from-blue-600 hover:to-blue-700 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            >
+              @if (currentForm().isSubmitting()) {
+                <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              }
+              Submit Form
+            </button>
+          </div>
         </form>
       </div>
 
@@ -128,16 +142,14 @@
         </div>
 
         <!-- Form Validator Card -->
-        <div class="lg:col-span-2">
-          <app-signal-form-validator
-            [form]="currentForm()"
-            [showErrors]="showErrors()"
-            [showSubmit]="true"
-            [showCancel]="false"
-            [submitText]="'Submit Form'"
-            (submit)="onSubmit()"
-          />
-        </div>
+         <div class="lg:col-span-2">
+           <app-signal-form-validator
+             [form]="currentForm()"
+             [showErrors]="showErrors()"
+             [showSubmit]="false"
+             [showCancel]="false"
+           />
+         </div>
       </div>
 
       <!-- Result Display -->
