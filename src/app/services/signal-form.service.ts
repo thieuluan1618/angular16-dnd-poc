@@ -27,10 +27,19 @@ export class SignalFormService {
 
     email: (message = 'Please enter a valid email'): SignalValidator<string> => ({
       name: 'email',
-      validate: (value: string): ValidationResult => ({
-        isValid: !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-        message: message
-      })
+      validate: (value: string): ValidationResult => {
+        // Only validate if value is not empty (required validator handles empty)
+        if (!value) {
+          return { isValid: true };
+        }
+        // Email regex: basic validation for common email patterns
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailRegex.test(value);
+        return {
+          isValid,
+          message: !isValid ? message : undefined
+        };
+      }
     }),
 
     minLength: (min: number, message?: string): SignalValidator<string> => ({
