@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GridStackComponent } from '../../components/grid-stack/grid-stack.component';
@@ -16,13 +16,18 @@ import { ToastService } from '../../services/toast.service';
  * - GridStack container in edit/view mode
  * - Mode toggle
  * - Layout persistence to localStorage
+ * 
+ * Uses Angular 21 signals for full zoneless compatibility
  */
 @Component({
     selector: 'app-demo',
     standalone: true,
     imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
     templateUrl: './demo.component.html',
-    styleUrls: ['./demo.component.scss']
+    styleUrls: ['./demo.component.scss'],
+    // TODO: This component uses signals for full zoneless compatibility.
+    // Change detection is OnPush to optimize performance with signal-based state.
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoComponent {
   private toastService = inject(ToastService);

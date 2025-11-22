@@ -1,4 +1,4 @@
-import { Component, signal, computed, effect, inject } from '@angular/core';
+import { Component, signal, computed, effect, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './angular21-demo.component.html',
-  styleUrls: ['./angular21-demo.component.scss']
+  styleUrls: ['./angular21-demo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Angular21DemoComponent {
   // Signal: Reactive state

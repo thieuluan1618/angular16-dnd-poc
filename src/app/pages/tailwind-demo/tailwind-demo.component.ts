@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ColorScheme {
@@ -11,7 +11,8 @@ interface ColorScheme {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tailwind-demo.component.html',
-  styleUrls: ['./tailwind-demo.component.scss']
+  styleUrls: ['./tailwind-demo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TailwindDemoComponent {
   selectedTab = signal<'colors' | 'components' | 'responsive' | 'animations'>('colors');
