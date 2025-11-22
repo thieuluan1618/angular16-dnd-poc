@@ -108,18 +108,41 @@
 
             <!-- Features -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="bg-white p-4 rounded-lg border-l-4 border-indigo-500">
+              <a href="https://angular.dev/guide/signals" target="_blank" class="bg-white p-4 rounded-lg border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
                 <h4 class="font-bold text-indigo-900 mb-2">Reactive State</h4>
                 <p class="text-sm text-gray-700">Fine-grained reactivity with automatic dependency tracking</p>
-              </div>
-              <div class="bg-white p-4 rounded-lg border-l-4 border-purple-500">
+                <p class="text-xs text-indigo-600 mt-2">📖 Learn more</p>
+              </a>
+              <a href="https://angular.dev/guide/signals#computed-signals" target="_blank" class="bg-white p-4 rounded-lg border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
                 <h4 class="font-bold text-purple-900 mb-2">Computed Values</h4>
                 <p class="text-sm text-gray-700">Memoized derived state that updates automatically</p>
-              </div>
-              <div class="bg-white p-4 rounded-lg border-l-4 border-pink-500">
+                <p class="text-xs text-purple-600 mt-2">📖 Learn more</p>
+              </a>
+              <a href="https://angular.dev/guide/signals#effects" target="_blank" class="bg-white p-4 rounded-lg border-l-4 border-pink-500 hover:shadow-lg transition-shadow">
                 <h4 class="font-bold text-pink-900 mb-2">Effects</h4>
                 <p class="text-sm text-gray-700">Run side effects when signals change</p>
-              </div>
+                <p class="text-xs text-pink-600 mt-2">📖 Learn more</p>
+              </a>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+              <h4 class="font-bold text-indigo-300 mb-3">Code Example</h4>
+              <pre class="text-sm font-mono"><code>// Writable signals
+count = signal(0);
+isLoading = signal(false);
+
+// Computed signals (derived state)
+doubleCount = computed(() => this.count() * 2);
+
+// Update signal
+increment(): void &#123;
+  this.count.update(v =&gt; v + 1);
+&#125;
+
+// Template usage
+&lt;p&gt;Count: &#123;&#123; count() &#125;&#125;&lt;/p&gt;
+&lt;p&gt;Double: &#123;&#123; doubleCount() &#125;&#125;&lt;/p&gt;</code></pre>
             </div>
           </div>
         </div>
@@ -169,14 +192,41 @@
 
             <!-- Features -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-white p-4 rounded-lg border-l-4 border-purple-500">
+              <a href="https://angular.dev/guide/control-flow" target="_blank" class="bg-white p-4 rounded-lg border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
                 <h4 class="font-bold text-purple-900 mb-2">&#64;if / &#64;else</h4>
                 <p class="text-sm text-gray-700">Simple conditional rendering without *ngIf</p>
-              </div>
-              <div class="bg-white p-4 rounded-lg border-l-4 border-pink-500">
+                <p class="text-xs text-purple-600 mt-2">📖 Learn more</p>
+              </a>
+              <a href="https://angular.dev/guide/control-flow#for-loop" target="_blank" class="bg-white p-4 rounded-lg border-l-4 border-pink-500 hover:shadow-lg transition-shadow">
                 <h4 class="font-bold text-pink-900 mb-2">&#64;for with track</h4>
                 <p class="text-sm text-gray-700">Powerful looping with proper identity tracking</p>
-              </div>
+                <p class="text-xs text-pink-600 mt-2">📖 Learn more</p>
+              </a>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+              <h4 class="font-bold text-purple-300 mb-3">Code Example</h4>
+              <pre class="text-sm font-mono"><code>// Modern control flow
+&#64;if (isLoading()) &#123;
+  &lt;p&gt;Loading...&lt;/p&gt;
+&#125; &#64;else &#123;
+  &lt;p&gt;Ready&lt;/p&gt;
+&#125;
+
+// List with tracking
+&#64;for (item of items(); track item.id) &#123;
+  &lt;div&gt;&#123;&#123; item.name &#125;&#125;&lt;/div&gt;
+&#125;
+
+// Switch
+&#64;switch (tab()) &#123;
+  &#64;case ('home') &#123;
+    &lt;app-home /&gt;
+  &#64;case ('about') &#123;
+    &lt;app-about /&gt;
+&#125;
+</code></pre>
             </div>
           </div>
         </div>
@@ -192,23 +242,26 @@
 
           <div class="p-6 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-xl border border-pink-200">
+              <a href="https://angular.dev/guide/change-detection" target="_blank" class="bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-xl border border-pink-200 hover:shadow-lg transition-shadow">
                 <div class="text-3xl mb-3">⚡</div>
                 <h4 class="font-bold text-pink-900 mb-2">Zoneless Angular</h4>
                 <p class="text-sm text-gray-700">Eliminates Zone.js overhead for faster change detection</p>
-              </div>
+                <p class="text-xs text-pink-600 mt-3">📖 Learn more</p>
+              </a>
 
-              <div class="bg-gradient-to-br from-rose-50 to-red-50 p-6 rounded-xl border border-rose-200">
+              <a href="https://angular.dev/guide/optimization/tree-shaking" target="_blank" class="bg-gradient-to-br from-rose-50 to-red-50 p-6 rounded-xl border border-rose-200 hover:shadow-lg transition-shadow">
                 <div class="text-3xl mb-3">📦</div>
                 <h4 class="font-bold text-rose-900 mb-2">Smaller Bundles</h4>
                 <p class="text-sm text-gray-700">Tree-shakeable APIs and signal-based optimization</p>
-              </div>
+                <p class="text-xs text-rose-600 mt-3">📖 Learn more</p>
+              </a>
 
-              <div class="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border border-red-200">
+              <a href="https://angular.dev/guide/signals#performance-benefits" target="_blank" class="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border border-red-200 hover:shadow-lg transition-shadow">
                 <div class="text-3xl mb-3">🚀</div>
                 <h4 class="font-bold text-red-900 mb-2">Faster Rendering</h4>
                 <p class="text-sm text-gray-700">Fine-grained reactivity only updates what changed</p>
-              </div>
+                <p class="text-xs text-red-600 mt-3">📖 Learn more</p>
+              </a>
             </div>
 
             <div class="bg-white p-6 rounded-xl border-2 border-pink-200">
@@ -231,6 +284,36 @@
                   <span>Faster initial rendering and interactions</span>
                 </li>
               </ul>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+              <h4 class="font-bold text-rose-300 mb-3">Performance Best Practices</h4>
+              <pre class="text-sm font-mono"><code>// Use OnPush change detection
+&#64;Component(&#123;
+  selector: 'app-my-component',
+  changeDetection: ChangeDetectionStrategy.OnPush
+&#125;)
+
+// Signal-based forms
+myForm = signal(&#123;
+  name: signal(''),
+  email: signal('')
+&#125;)
+
+// Computed selectors
+userName = computed(
+  () =&gt; this.user().firstName + ' '
+    + this.user().lastName
+)
+
+// Clean up with takeUntilDestroyed
+ngOnInit() &#123;
+  this.data$
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(d =&gt; this.process(d))
+&#125;
+</code></pre>
             </div>
           </div>
         </div>

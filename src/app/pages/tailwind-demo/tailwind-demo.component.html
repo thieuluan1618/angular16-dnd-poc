@@ -110,8 +110,29 @@
               <p class="text-xs text-gray-600">bg-blue-500</p>
             </div>
           </div>
-        </div>
-      }
+
+          <!-- Code Snippet -->
+          <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+            <h3 class="font-bold text-blue-300 mb-3">Tailwind Color Usage</h3>
+            <pre class="text-sm font-mono"><code>// Background colors
+          &lt;div class="bg-blue-500"&gt;...&lt;/div&gt;
+          &lt;div class="bg-gradient-to-r from-blue-500 
+          to-purple-600"&gt;...&lt;/div&gt;
+
+          // Text colors
+          &lt;p class="text-blue-600"&gt;...&lt;/p&gt;
+          &lt;span class="text-white/50"&gt;...&lt;/span&gt;
+
+          // Border colors
+          &lt;div class="border-4 border-blue-500"&gt;...&lt;/div&gt;
+
+          // Color scale
+          &lt;div class="bg-blue-100"&gt;Light&lt;/div&gt;
+          &lt;div class="bg-blue-600"&gt;Medium&lt;/div&gt;
+          &lt;div class="bg-blue-900"&gt;Dark&lt;/div&gt;</code></pre>
+          </div>
+          </div>
+          }
 
       <!-- Components Tab -->
       @if (selectedTab() === 'components') {
@@ -164,11 +185,32 @@
                 <textarea placeholder="Enter message..." class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors resize-none" rows="4"></textarea>
               </div>
             </div>
-          </div>
-        </div>
-      }
 
-      <!-- Responsive Tab -->
+            <!-- Code Snippet -->
+            <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+              <h3 class="font-bold text-blue-300 mb-3">Component Utilities</h3>
+              <pre class="text-sm font-mono"><code>// Button
+            &lt;button class="px-6 py-2 bg-blue-600 text-white 
+            rounded-lg hover:bg-blue-700 transition-colors"&gt;
+            Click me
+            &lt;/button&gt;
+
+            // Card
+            &lt;div class="bg-white rounded-xl shadow-md p-6"&gt;
+            &lt;h2&gt;...&lt;/h2&gt;
+            &lt;p&gt;...&lt;/p&gt;
+            &lt;/div&gt;
+
+            // Form input
+            &lt;input class="w-full px-4 py-2 border-2 
+            border-gray-300 rounded-lg 
+            focus:border-blue-500 focus:ring-2" /&gt;</code></pre>
+            </div>
+            </div>
+            </div>
+            }
+
+            <!-- Responsive Tab -->
       @if (selectedTab() === 'responsive') {
         <div class="space-y-8">
           <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
@@ -195,12 +237,36 @@
                 <p class="text-sm md:text-base lg:text-lg text-gray-700">This is responsive paragraph text that scales based on screen size. Mobile users see smaller text, while desktop users see larger text.</p>
                 <p class="text-xs text-gray-600">text-sm md:text-base lg:text-lg</p>
               </div>
-            </div>
-          </div>
-        </div>
-      }
+              </div>
+              </div>
 
-      <!-- Animations Tab -->
+              <!-- Code Snippet -->
+              <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+                <h3 class="font-bold text-blue-300 mb-3">Responsive Breakpoints</h3>
+                <pre class="text-sm font-mono"><code>// Mobile-first: sm:640 md:768 lg:1024
+
+              // Responsive grid
+              &lt;div class="grid grid-cols-1 md:grid-cols-2 
+              lg:grid-cols-4 gap-4"&gt;
+              ...
+              &lt;/div&gt;
+
+              // Responsive text
+              &lt;h1 class="text-2xl md:text-3xl lg:text-4xl"&gt;
+              Heading
+              &lt;/h1&gt;
+
+              // Responsive spacing
+              &lt;div class="p-4 md:p-6 lg:p-8"&gt;...&lt;/div&gt;
+
+              // Conditional display
+              &lt;div class="hidden lg:block"&gt;Desktop&lt;/div&gt;
+              &lt;div class="lg:hidden"&gt;Mobile&lt;/div&gt;</code></pre>
+              </div>
+              </div>
+              }
+
+              <!-- Animations Tab -->
       @if (selectedTab() === 'animations') {
         <div class="space-y-8">
           <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
@@ -248,10 +314,36 @@
               <button class="px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 hover:rotate-1 transition-all duration-200">
                 Rotate Effect
               </button>
+              </div>
+
+              <!-- Code Snippet -->
+              <div class="bg-slate-900 text-white p-6 rounded-xl overflow-x-auto">
+                <h3 class="font-bold text-blue-300 mb-3">Animation & Transition</h3>
+                <pre class="text-sm font-mono"><code>// Built-in animations
+              &lt;div class="animate-bounce"&gt;Bounce&lt;/div&gt;
+              &lt;div class="animate-pulse"&gt;Pulse&lt;/div&gt;
+              &lt;div class="animate-spin"&gt;Spin&lt;/div&gt;
+              &lt;div class="animate-ping"&gt;Ping&lt;/div&gt;
+
+              // Smooth transitions
+              &lt;button class="transition-colors duration-200 
+              hover:bg-blue-700"&gt;Hover&lt;/button&gt;
+
+              // Transform effects
+              &lt;button class="hover:scale-105 transform 
+              transition-transform duration-200"&gt;
+              Scale
+              &lt;/button&gt;
+
+              // Multiple transforms
+              &lt;button class="hover:scale-110 hover:rotate-1 
+              hover:shadow-lg transition-all"&gt;
+              Complex
+              &lt;/button&gt;</code></pre>
+              </div>
             </div>
           </div>
-        </div>
-      }
-    </div>
-  </main>
-</div>
+       }
+     </div>
+   </main>
+ </div>
