@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { DemoComponent } from './pages/demo/demo.component';
 import { SignalFormDemoComponent } from './pages/signal-form-demo/signal-form-demo.component';
 import { Angular21DemoComponent } from './pages/angular21-demo/angular21-demo.component';
+import { TailwindDemoComponent } from './pages/tailwind-demo/tailwind-demo.component';
 
 const routes: Routes = [
   { path: '', component: DemoComponent },
   { path: 'demo', component: DemoComponent },
   { path: 'signal-forms', component: SignalFormDemoComponent },
   { path: 'angular21', component: Angular21DemoComponent },
+  { path: 'tailwind', component: TailwindDemoComponent },
   { path: '**', redirectTo: '' }
 ];
 

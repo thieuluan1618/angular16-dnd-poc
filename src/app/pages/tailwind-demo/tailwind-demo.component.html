@@ -1,0 +1,257 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+        Tailwind CSS with Angular 21
+      </h1>
+      <p class="text-lg text-gray-600">
+        Explore utility-first CSS styling integrated with modern Angular patterns
+      </p>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <div class="bg-white border-b border-gray-200 sticky top-16 z-40">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex gap-2 overflow-x-auto">
+        <button
+          type="button"
+          (click)="switchTab('colors')"
+          [class]="selectedTab() === 'colors' ? 'px-6 py-3 font-semibold border-b-2 border-blue-600 text-blue-600' : 'px-6 py-3 font-medium text-gray-600 hover:text-gray-900 transition-colors'"
+        >
+          🎨 Colors
+        </button>
+        <button
+          type="button"
+          (click)="switchTab('components')"
+          [class]="selectedTab() === 'components' ? 'px-6 py-3 font-semibold border-b-2 border-blue-600 text-blue-600' : 'px-6 py-3 font-medium text-gray-600 hover:text-gray-900 transition-colors'"
+        >
+          🧩 Components
+        </button>
+        <button
+          type="button"
+          (click)="switchTab('responsive')"
+          [class]="selectedTab() === 'responsive' ? 'px-6 py-3 font-semibold border-b-2 border-blue-600 text-blue-600' : 'px-6 py-3 font-medium text-gray-600 hover:text-gray-900 transition-colors'"
+        >
+          📱 Responsive
+        </button>
+        <button
+          type="button"
+          (click)="switchTab('animations')"
+          [class]="selectedTab() === 'animations' ? 'px-6 py-3 font-semibold border-b-2 border-blue-600 text-blue-600' : 'px-6 py-3 font-medium text-gray-600 hover:text-gray-900 transition-colors'"
+        >
+          ✨ Animations
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <main class="py-8 px-4">
+    <div class="max-w-6xl mx-auto">
+      <!-- Colors Tab -->
+      @if (selectedTab() === 'colors') {
+        <div class="space-y-8">
+          <!-- Color Scheme Selector -->
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Color Schemes</h2>
+            <div class="flex gap-4 flex-wrap">
+              <button
+                type="button"
+                (click)="switchColorScheme('blue')"
+                [class]="selectedColorScheme() === 'blue' ? 'px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md font-semibold' : 'px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-semibold'"
+              >
+                Blue Theme
+              </button>
+              <button
+                type="button"
+                (click)="switchColorScheme('purple')"
+                [class]="selectedColorScheme() === 'purple' ? 'px-6 py-2 bg-purple-600 text-white rounded-lg shadow-md font-semibold' : 'px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-semibold'"
+              >
+                Purple Theme
+              </button>
+              <button
+                type="button"
+                (click)="switchColorScheme('pink')"
+                [class]="selectedColorScheme() === 'pink' ? 'px-6 py-2 bg-pink-600 text-white rounded-lg shadow-md font-semibold' : 'px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-semibold'"
+              >
+                Pink Theme
+              </button>
+            </div>
+          </div>
+
+          <!-- Color Palette -->
+          <div [ngClass]="'bg-gradient-to-r ' + currentScheme().colors.bg" class="rounded-xl shadow-lg p-12 text-white text-center">
+            <h3 class="text-3xl font-bold mb-2">{{ currentScheme().name }} Theme</h3>
+            <p class="text-lg opacity-90">Tailwind's powerful color system in action</p>
+          </div>
+
+          <!-- Color Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white rounded-lg shadow p-4 border-l-4 border-red-500">
+              <div class="w-full h-24 bg-red-500 rounded mb-2"></div>
+              <p class="font-semibold text-gray-900">Red</p>
+              <p class="text-xs text-gray-600">bg-red-500</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
+              <div class="w-full h-24 bg-yellow-500 rounded mb-2"></div>
+              <p class="font-semibold text-gray-900">Yellow</p>
+              <p class="text-xs text-gray-600">bg-yellow-500</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+              <div class="w-full h-24 bg-green-500 rounded mb-2"></div>
+              <p class="font-semibold text-gray-900">Green</p>
+              <p class="text-xs text-gray-600">bg-green-500</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+              <div class="w-full h-24 bg-blue-500 rounded mb-2"></div>
+              <p class="font-semibold text-gray-900">Blue</p>
+              <p class="text-xs text-gray-600">bg-blue-500</p>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Components Tab -->
+      @if (selectedTab() === 'components') {
+        <div class="space-y-8">
+          <!-- Buttons -->
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Button Components</h2>
+            <div class="space-y-4">
+              <div class="flex gap-4 flex-wrap">
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md">Primary</button>
+                <button class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition-colors">Secondary</button>
+                <button class="px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md">Success</button>
+                <button class="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-md">Danger</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Card Components</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              @for (card of cards; track card.title; let i = $index) {
+                <div 
+                  class="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+                  (mouseenter)="setHoverIndex(i)"
+                  (mouseleave)="setHoverIndex(-1)"
+                >
+                  <div class="text-4xl mb-3">{{ card.icon }}</div>
+                  <h3 class="text-lg font-bold text-gray-900 mb-2">{{ card.title }}</h3>
+                  <p class="text-sm text-gray-600">{{ card.description }}</p>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Input Fields -->
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Form Elements</h2>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Text Input</label>
+                <input type="text" placeholder="Enter text..." class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Input</label>
+                <input type="email" placeholder="Enter email..." class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Textarea</label>
+                <textarea placeholder="Enter message..." class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors resize-none" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Responsive Tab -->
+      @if (selectedTab() === 'responsive') {
+        <div class="space-y-8">
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Responsive Grid</h2>
+            <p class="text-gray-600 mb-4">Resize your browser to see the grid adapt. Uses: grid-cols-1 md:grid-cols-2 lg:grid-cols-4</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+                <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg p-6 border-2 border-blue-300 text-center">
+                  <p class="text-3xl font-bold text-blue-600">{{ i }}</p>
+                  <p class="text-sm text-gray-600 mt-2">Responsive Column</p>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Responsive Typography</h2>
+            <div class="space-y-6">
+              <div>
+                <p class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">Responsive Heading</p>
+                <p class="text-xs text-gray-600">text-2xl md:text-3xl lg:text-4xl</p>
+              </div>
+              <div>
+                <p class="text-sm md:text-base lg:text-lg text-gray-700">This is responsive paragraph text that scales based on screen size. Mobile users see smaller text, while desktop users see larger text.</p>
+                <p class="text-xs text-gray-600">text-sm md:text-base lg:text-lg</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Animations Tab -->
+      @if (selectedTab() === 'animations') {
+        <div class="space-y-8">
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Tailwind Animations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Bounce -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-blue-500 rounded-lg animate-bounce mb-4"></div>
+                <p class="font-semibold text-gray-900">Bounce</p>
+                <p class="text-xs text-gray-600">animate-bounce</p>
+              </div>
+
+              <!-- Pulse -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-purple-500 rounded-lg animate-pulse mb-4"></div>
+                <p class="font-semibold text-gray-900">Pulse</p>
+                <p class="text-xs text-gray-600">animate-pulse</p>
+              </div>
+
+              <!-- Spin -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-pink-500 rounded-lg animate-spin mb-4"></div>
+                <p class="font-semibold text-gray-900">Spin</p>
+                <p class="text-xs text-gray-600">animate-spin</p>
+              </div>
+
+              <!-- Ping -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-green-500 rounded-lg animate-ping mb-4"></div>
+                <p class="font-semibold text-gray-900">Ping</p>
+                <p class="text-xs text-gray-600">animate-ping</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Transitions & Hover Effects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <button class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                Scale & Shadow
+              </button>
+              <button class="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 hover:translate-y-1 transition-all duration-200">
+                Translate Effect
+              </button>
+              <button class="px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 hover:rotate-1 transition-all duration-200">
+                Rotate Effect
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </main>
+</div>
