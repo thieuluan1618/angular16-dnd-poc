@@ -18,11 +18,10 @@ import { ToastService } from '../../services/toast.service';
  * - Layout persistence to localStorage
  */
 @Component({
-  selector: 'app-demo',
-  standalone: true,
-  imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
-  templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.scss']
+    selector: 'app-demo',
+    imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
+    templateUrl: './demo.component.html',
+    styleUrls: ['./demo.component.scss']
 })
 export class DemoComponent {
   private toastService = inject(ToastService);

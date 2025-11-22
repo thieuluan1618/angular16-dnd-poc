@@ -15,11 +15,10 @@ interface ChartDataPoint {
  * In a real application, this would integrate with a charting library like Chart.js or D3.
  */
 @Component({
-  selector: 'app-chart-widget',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './chart-widget.component.html',
-  styleUrls: ['./chart-widget.component.scss']
+    selector: 'app-chart-widget',
+    imports: [CommonModule],
+    templateUrl: './chart-widget.component.html',
+    styleUrls: ['./chart-widget.component.scss']
 })
 export class ChartWidgetComponent extends BaseWidgetComponent {
   @Input() globalFilterValue: GlobalFilterValue = {};

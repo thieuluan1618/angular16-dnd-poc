@@ -23,11 +23,10 @@ interface DataItem {
  * - Status filtering (active/inactive)
  */
 @Component({
-  selector: 'app-data-widget',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './data-widget.component.html',
-  styleUrls: ['./data-widget.component.scss']
+    selector: 'app-data-widget',
+    imports: [CommonModule],
+    templateUrl: './data-widget.component.html',
+    styleUrls: ['./data-widget.component.scss']
 })
 export class DataWidgetComponent extends BaseWidgetComponent implements OnInit {
   /**

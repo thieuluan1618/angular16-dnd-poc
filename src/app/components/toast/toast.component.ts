@@ -7,11 +7,10 @@ import { ToastService } from '../../services/toast.service';
  * Displays all active toasts
  */
 @Component({
-  selector: 'app-toast-container',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss']
+    selector: 'app-toast-container',
+    imports: [CommonModule],
+    templateUrl: './toast.component.html',
+    styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent {
   private toastService = inject(ToastService);

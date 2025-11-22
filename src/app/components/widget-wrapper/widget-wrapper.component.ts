@@ -42,11 +42,10 @@ export interface GridStackWidgetNativeElement extends GridItemHTMLElement {
  * and receives its configuration via dependency injection tokens.
  */
 @Component({
-  selector: 'app-widget-wrapper',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './widget-wrapper.component.html',
-  styleUrls: ['./widget-wrapper.component.scss']
+    selector: 'app-widget-wrapper',
+    imports: [CommonModule],
+    templateUrl: './widget-wrapper.component.html',
+    styleUrls: ['./widget-wrapper.component.scss']
 })
 export class WidgetWrapperComponent implements OnInit, OnDestroy {
   // Angular 16: Use inject() for dependency injection

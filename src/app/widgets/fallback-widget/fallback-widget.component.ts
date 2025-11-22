@@ -9,11 +9,10 @@ import { BaseWidgetComponent } from '../../base/base-widget.component';
  * Shows widget information and error message for debugging.
  */
 @Component({
-  selector: 'app-fallback-widget',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './fallback-widget.component.html',
-  styleUrls: ['./fallback-widget.component.scss']
+    selector: 'app-fallback-widget',
+    imports: [CommonModule],
+    templateUrl: './fallback-widget.component.html',
+    styleUrls: ['./fallback-widget.component.scss']
 })
 export class FallbackWidgetComponent extends BaseWidgetComponent {
   /**

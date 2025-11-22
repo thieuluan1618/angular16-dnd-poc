@@ -11,11 +11,10 @@ import { GlobalFilterValue } from '../../models';
  * Also demonstrates global filter integration.
  */
 @Component({
-  selector: 'app-hello-widget',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './hello-widget.component.html',
-  styleUrls: ['./hello-widget.component.scss']
+    selector: 'app-hello-widget',
+    imports: [CommonModule],
+    templateUrl: './hello-widget.component.html',
+    styleUrls: ['./hello-widget.component.scss']
 })
 export class HelloWidgetComponent extends BaseWidgetComponent {
   /**

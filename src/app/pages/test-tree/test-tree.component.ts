@@ -13,16 +13,15 @@ interface TreeNode {
 }
 
 @Component({
-  selector: 'app-test-tree',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    CdkTreeModule,
-    MatTreeModule
-  ],
-  templateUrl: './test-tree.component.html',
-  styleUrls: ['./test-tree.component.scss']
+    selector: 'app-test-tree',
+    imports: [
+        CommonModule,
+        FormsModule,
+        CdkTreeModule,
+        MatTreeModule
+    ],
+    templateUrl: './test-tree.component.html',
+    styleUrls: ['./test-tree.component.scss']
 })
 export class TestTreeComponent implements OnInit {
   treeControl = new NestedTreeControl<TreeNode>(node => node.children);

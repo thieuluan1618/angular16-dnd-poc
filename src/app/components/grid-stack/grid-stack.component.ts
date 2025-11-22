@@ -53,11 +53,10 @@ export interface GridStackNativeElement extends GridHTMLElement {
  * ```
  */
 @Component({
-  selector: 'app-grid-stack',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './grid-stack.component.html',
-  styleUrls: ['./grid-stack.component.scss']
+    selector: 'app-grid-stack',
+    imports: [CommonModule],
+    templateUrl: './grid-stack.component.html',
+    styleUrls: ['./grid-stack.component.scss']
 })
 export class GridStackComponent implements OnChanges, OnInit, AfterViewInit {
   // Angular 16: Use inject() instead of constructor DI

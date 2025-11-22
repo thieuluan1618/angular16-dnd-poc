@@ -10,11 +10,10 @@ import { GlobalFilterValue } from '../../models';
  * Demonstrates basic widget structure and edit/view modes.
  */
 @Component({
-  selector: 'app-hello-mom-widget',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './hello-mom-widget.component.html',
-  styleUrls: ['./hello-mom-widget.component.scss']
+    selector: 'app-hello-mom-widget',
+    imports: [CommonModule],
+    templateUrl: './hello-mom-widget.component.html',
+    styleUrls: ['./hello-mom-widget.component.scss']
 })
 export class HelloMomWidgetComponent extends BaseWidgetComponent {
   isVisible = true;
