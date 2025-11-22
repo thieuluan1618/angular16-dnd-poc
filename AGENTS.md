@@ -597,6 +597,61 @@ For older browser support, update the `.browserslistrc` file accordingly.
 
 ---
 
+## Angular 21 Implementation Example: DemoComponent
+
+The demo component showcases all Angular 21 patterns:
+
+```typescript
+@Component({
+  selector: 'app-demo',
+  standalone: true,
+  imports: [CommonModule, FormsModule, GridStackComponent, /* ... */],
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.scss']
+})
+export class DemoComponent {
+  private toastService = inject(ToastService);
+
+  // Signals for state
+  mode = signal<'edit' | 'view'>('edit');
+  widgets = signal<GridWidget[]>([]);
+  globalFilterValue = signal<GlobalFilterValue>({...});
+
+  // Computed derived state
+  gridStackOptions = computed(() =>
+    this.mode() === 'edit' ? gridStackEditModeOptions : gridStackViewModeOptions
+  );
+
+  // Methods using signal updates
+  toggleMode(): void {
+    this.mode.update(current => current === 'edit' ? 'view' : 'edit');
+  }
+
+  onLayoutChange(widgets: GridWidget[]): void {
+    this.widgets.set(widgets);
+    this.saveLayout();
+  }
+}
+```
+
+Template uses modern control flow:
+```html
+@if (mode() === 'edit') {
+  <!-- edit mode UI -->
+}
+
+@for (widget of widgetPrototypes; track widget.id) {
+  <!-- widget item -->
+}
+
+<app-grid-stack
+  [mode]="mode()"
+  [widgets]="widgets()"
+  [options]="gridStackOptions()"
+  (onChange)="onLayoutChange($event)"
+/>
+```
+
 ## Angular 21 Patterns
 
 ### Standalone Components
@@ -622,10 +677,39 @@ export class MyComponentComponent {
 ### Signals for Reactive State
 ```typescript
 export class MyComponentComponent {
+  // Writable signals for state
   count = signal(0);
   isLoading = signal(false);
+
+  // Computed signals for derived state
   doubleCount = computed(() => this.count() * 2);
+
+  // Update signals
+  increment(): void {
+    this.count.update(v => v + 1);
+  }
+
+  // Set signals
+  reset(): void {
+    this.count.set(0);
+  }
 }
+```
+
+### Modern Control Flow in Templates
+```html
+<!-- @if instead of *ngIf -->
+@if (isLoading()) {
+  <p>Loading...</p>
+}
+
+<!-- @for instead of *ngFor -->
+@for (item of items(); track item.id) {
+  <div>{{ item.name }}</div>
+}
+
+<!-- Signal binding with () -->
+<p>Count: {{ count() }}</p>
 ```
 
 ### Lifecycle Management
@@ -696,13 +780,20 @@ this.zone.runOutsideAngular(() => {
 
 ---
 
-## Reference Implementation
+## Summary: Angular 21 Modernization
 
-This POC is based on Angular 15 implementation in `../mfe.custom-page`:
-- **[../mfe.custom-page/DRAG_AND_DROP_IMPLEMENTATION.md](../mfe.custom-page/DRAG_AND_DROP_IMPLEMENTATION.md)** - Complete implementation guide
-- **[../mfe.custom-page/CLAUDE.md](../mfe.custom-page/CLAUDE.md)** - Reference architecture
-- **Reference source code:** `../mfe.custom-page/src/modules/common/grid-stack/`
+This POC demonstrates **modern Angular 21 development** with:
+
+✅ **Standalone Components** - No NgModules required  
+✅ **Signals & Computed** - Fully reactive state management  
+✅ **Modern Control Flow** - `@if`, `@for`, `@switch` instead of `*ngIf`, `*ngFor`  
+✅ **inject() Function** - No constructor dependency injection  
+✅ **Signal Forms** - Signal-based form validation system  
+✅ **GridStack Drag & Drop** - Full drag-and-drop widget system  
+✅ **Tailwind CSS** - Utility-first styling  
+
+All components (DemoComponent, SignalFormDemoComponent, Angular21DemoComponent, TailwindDemoComponent) follow these modern patterns consistently.
 
 ---
 
-This documentation provides a comprehensive guide for working with the signal form system and GridStack drag-and-drop functionality in the Angular 21 POC application.
+This documentation provides a comprehensive guide for working with the signal form system, GridStack drag-and-drop functionality, and Angular 21 patterns in the POC application.
