@@ -1,0 +1,82 @@
+<div class="signal-form-validator">
+  <!-- Validation Summary -->
+  <div [class]="getValidationStatusClasses()" role="status" aria-live="polite">
+    <span class="signal-form-validator__status__icon">{{ getValidationStatusIcon() }}</span>
+    <span class="signal-form-validator__status__text">{{ getValidationSummary() }}</span>
+  </div>
+
+  <!-- All Field Errors Summary -->
+  @if (showErrors() && validationStatus().hasErrors) {
+    <div class="signal-form-validator__errors" role="alert" aria-label="Form validation errors">
+      <h3 class="signal-form-validator__errors__title">
+        Please fix the following errors:
+      </h3>
+      <ul class="signal-form-validator__errors__list">
+        @for (field of form().fields; track field.id) {
+          @let fieldErrors = getFieldErrors(field.id);
+          @if (fieldErrors.length > 0) {
+            <li class="signal-form-validator__errors__item">
+              <strong>{{ field.label }}:</strong>
+              <ul class="signal-form-validator__field-errors">
+                @for (error of fieldErrors; track $index) {
+                  <li class="signal-form-validator__field-errors__item">{{ error }}</li>
+                }
+              </ul>
+            </li>
+          }
+        }
+      </ul>
+    </div>
+  }
+
+  <!-- Form Actions -->
+  @if (showSubmit()) {
+    <div class="signal-form-validator__actions">
+      @if (showCancel()) {
+        <button
+          type="button"
+          class="btn btn-secondary"
+          [disabled]="loading() || form().isSubmitting()"
+          (click)="onCancel()"
+          aria-label="Cancel form"
+        >
+          {{ cancelText() }}
+        </button>
+      }
+
+      <button
+        type="submit"
+        class="btn"
+        [ngClass]="submitClass()"
+        [disabled]="submitButtonDisabled()"
+        (click)="onSubmit()"
+        [attr.aria-label]="submitButtonText() + (submitButtonDisabled() ? ' (disabled)' : '')"
+      >
+        @if (validationStatus().isSubmitting || loading()) {
+          <span class="signal-form-validator__spinner" aria-hidden="true"></span>
+        }
+        {{ submitButtonText() }}
+      </button>
+    </div>
+  }
+
+  <!-- Additional Form Info -->
+  <div class="signal-form-validator__info" role="contentinfo">
+    <div class="signal-form-validator__info__item">
+      <span class="signal-form-validator__info__label">Fields:</span>
+      <span class="signal-form-validator__info__value">{{ form().fields.length }}</span>
+    </div>
+    <div class="signal-form-validator__info__item">
+      <span class="signal-form-validator__info__label">Required:</span>
+      <span class="signal-form-validator__info__value">
+        {{ getRequiredFieldsCount() }}
+      </span>
+    </div>
+    <div class="signal-form-validator__info__item">
+      <span class="signal-form-validator__info__label">Modified:</span>
+      <span class="signal-form-validator__info__value" [class.signal-form-validator__info__value--modified]="validationStatus().isDirty">
+        {{ validationStatus().isDirty ? 'Yes' : 'No' }}
+      </span>
+    </div>
+  </div>
+</div>

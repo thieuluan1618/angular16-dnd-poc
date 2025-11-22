@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 @Component({
     selector: 'app-root',
     imports: [RouterModule],
-    template: '<router-outlet></router-outlet>',
-    styles: []
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular16-dnd-poc';
+  title = 'angular21-signal-forms-demo';
 }
