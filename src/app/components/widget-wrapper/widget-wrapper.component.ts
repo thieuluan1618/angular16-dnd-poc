@@ -13,7 +13,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { GridItemHTMLElement } from 'gridstack';
 
 import { BaseWidgetComponent, isOnGlobalFilterChanges } from '../../base/base-widget.component';
@@ -43,7 +43,7 @@ export interface GridStackWidgetNativeElement extends GridItemHTMLElement {
  */
 @Component({
     selector: 'app-widget-wrapper',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './widget-wrapper.component.html',
     styleUrls: ['./widget-wrapper.component.scss']
 })

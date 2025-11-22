@@ -2,12 +2,16 @@
   <div class="widget-header">
     <div class="widget-title">{{ greeting }}</div>
     <div class="widget-actions">
-      <button class="btn-action" title="Zoom In" (click)="onZoomInClick()" *ngIf="mode === 'edit'">
-        <span>🔍</span>
-      </button>
-      <button class="btn-action" title="Remove" (click)="onRemoveClick()" *ngIf="mode === 'edit'">
-        <span>✕</span>
-      </button>
+      @if (mode === 'edit') {
+        <button class="btn-action" title="Zoom In" (click)="onZoomInClick()">
+          <span>🔍</span>
+        </button>
+      }
+      @if (mode === 'edit') {
+        <button class="btn-action" title="Remove" (click)="onRemoveClick()">
+          <span>✕</span>
+        </button>
+      }
     </div>
   </div>
 
@@ -18,9 +22,11 @@
       <p class="submessage">Thank you for everything you do.</p>
     </div>
 
-    <div *ngIf="filterMessage" class="filter-info">
-      {{ filterMessage }}
-    </div>
+    @if (filterMessage) {
+      <div class="filter-info">
+        {{ filterMessage }}
+      </div>
+    }
   </div>
 
   <div class="widget-footer">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
@@ -15,11 +15,10 @@ interface TreeNode {
 @Component({
     selector: 'app-test-tree',
     imports: [
-        CommonModule,
-        FormsModule,
-        CdkTreeModule,
-        MatTreeModule
-    ],
+    FormsModule,
+    CdkTreeModule,
+    MatTreeModule
+],
     templateUrl: './test-tree.component.html',
     styleUrls: ['./test-tree.component.scss']
 })

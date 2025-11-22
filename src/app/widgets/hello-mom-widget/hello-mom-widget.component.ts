@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BaseWidgetComponent } from '../../base/base-widget.component';
 import { GlobalFilterValue } from '../../models';
 
@@ -11,7 +11,7 @@ import { GlobalFilterValue } from '../../models';
  */
 @Component({
     selector: 'app-hello-mom-widget',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './hello-mom-widget.component.html',
     styleUrls: ['./hello-mom-widget.component.scss']
 })

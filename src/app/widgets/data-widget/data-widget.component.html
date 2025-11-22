@@ -5,14 +5,16 @@
       <!-- <div class="debug-info">{{ debugInfo }}</div>
       <div class="filter-status-header">{{ headerFilterStatus }}</div> -->
     </div>
-    <div class="widget-actions" *ngIf="mode === 'edit'">
-      <button class="btn-icon" (click)="onSettingsClick()" title="Settings">
-        ⚙️
-      </button>
-      <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
-        &times;
-      </button>
-    </div>
+    @if (mode === 'edit') {
+      <div class="widget-actions">
+        <button class="btn-icon" (click)="onSettingsClick()" title="Settings">
+          ⚙️
+        </button>
+        <button class="btn-icon" (click)="onRemoveClick()" title="Remove">
+          &times;
+        </button>
+      </div>
+    }
   </div>
 
   <div class="widget-content">
@@ -31,66 +33,76 @@
             <span class="stat-label">Showing:</span>
             <span class="stat-value showing">{{ filterStats.filtered }}</span>
           </span>
-          <span class="stat-item" *ngIf="filterStats.hidden > 0">
-            <span class="stat-label">Hidden:</span>
-            <span class="stat-value hidden">{{ filterStats.hidden }}</span>
-          </span>
+          @if (filterStats.hidden > 0) {
+            <span class="stat-item">
+              <span class="stat-label">Hidden:</span>
+              <span class="stat-value hidden">{{ filterStats.hidden }}</span>
+            </span>
+          }
         </div>
       </div>
     </div>
 
     <!-- Data Table -->
     <div class="table-container">
-      <table class="data-table" *ngIf="filteredData.length > 0">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of filteredData" [class.inactive]="item.status === 'inactive'">
-            <td>{{ item.id }}</td>
-            <td>
-              <div class="item-name">{{ item.name }}</div>
-              <div class="item-description">{{ item.description }}</div>
-            </td>
-            <td>
-              <span class="category-badge" [class]="'category-' + item.category.toLowerCase()">
-                {{ item.category }}
-              </span>
-            </td>
-            <td>
-              <span class="status-badge" [class]="'status-' + item.status">
-                {{ item.status }}
-              </span>
-            </td>
-            <td>{{ formatDate(item.createdDate) }}</td>
-            <td class="value-cell">{{ formatCurrency(item.value) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      @if (filteredData.length > 0) {
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of filteredData; track item) {
+              <tr [class.inactive]="item.status === 'inactive'">
+                <td>{{ item.id }}</td>
+                <td>
+                  <div class="item-name">{{ item.name }}</div>
+                  <div class="item-description">{{ item.description }}</div>
+                </td>
+                <td>
+                  <span class="category-badge" [class]="'category-' + item.category.toLowerCase()">
+                    {{ item.category }}
+                  </span>
+                </td>
+                <td>
+                  <span class="status-badge" [class]="'status-' + item.status">
+                    {{ item.status }}
+                  </span>
+                </td>
+                <td>{{ formatDate(item.createdDate) }}</td>
+                <td class="value-cell">{{ formatCurrency(item.value) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
 
       <!-- Empty State -->
-      <div class="empty-state" *ngIf="filteredData.length === 0">
-        <div class="empty-icon">🔍</div>
-        <h4>No data matches current filters</h4>
-        <p>Try adjusting your filter criteria to see more results.</p>
-        <div class="filter-hint">
-          <strong>Current filters:</strong> {{ filterSummary }}
+      @if (filteredData.length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <h4>No data matches current filters</h4>
+          <p>Try adjusting your filter criteria to see more results.</p>
+          <div class="filter-hint">
+            <strong>Current filters:</strong> {{ filterSummary }}
+          </div>
         </div>
-      </div>
+      }
     </div>
 
     <!-- Widget Info for Edit Mode -->
-    <div class="widget-info" *ngIf="mode === 'edit'">
-      <p class="info-text">
-        📊 This widget demonstrates advanced global filtering. Change the filters above to see real-time data filtering in action.
-      </p>
-    </div>
+    @if (mode === 'edit') {
+      <div class="widget-info">
+        <p class="info-text">
+          📊 This widget demonstrates advanced global filtering. Change the filters above to see real-time data filtering in action.
+        </p>
+      </div>
+    }
   </div>
 </div>

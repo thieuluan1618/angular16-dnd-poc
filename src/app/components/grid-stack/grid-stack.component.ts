@@ -17,7 +17,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { GridHTMLElement, GridStack, GridStackNode, GridStackOptions } from 'gridstack';
 
 import { GlobalFilterValue, GridWidget, Widget, WidgetSettingsChangeEvent, WidgetTitleChangeEvent } from '../../models';
@@ -54,7 +54,7 @@ export interface GridStackNativeElement extends GridHTMLElement {
  */
 @Component({
     selector: 'app-grid-stack',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './grid-stack.component.html',
     styleUrls: ['./grid-stack.component.scss']
 })

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { GridStackComponent } from '../../components/grid-stack/grid-stack.component';
 import { ToastComponent } from '../../components/toast/toast.component';
@@ -19,7 +19,7 @@ import { ToastService } from '../../services/toast.service';
  */
 @Component({
     selector: 'app-demo',
-    imports: [CommonModule, FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
+    imports: [FormsModule, GridStackComponent, ToastComponent, DraggableWidgetDirective],
     templateUrl: './demo.component.html',
     styleUrls: ['./demo.component.scss']
 })

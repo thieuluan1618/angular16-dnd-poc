@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BaseWidgetComponent } from '../../base/base-widget.component';
 
 /**
@@ -10,7 +10,7 @@ import { BaseWidgetComponent } from '../../base/base-widget.component';
  */
 @Component({
     selector: 'app-fallback-widget',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './fallback-widget.component.html',
     styleUrls: ['./fallback-widget.component.scss']
 })

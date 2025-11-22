@@ -1,18 +1,28 @@
 <div class="toast-container">
-  <div *ngFor="let toast of toasts()" [class]="getToastClass(toast.type)" role="status" aria-live="polite">
-    <div class="toast-content">
-      <span class="toast-icon">
-        <ng-container [ngSwitch]="toast.type">
-          <span *ngSwitchCase="'success'">✓</span>
-          <span *ngSwitchCase="'error'">✕</span>
-          <span *ngSwitchCase="'warning'">⚠</span>
-          <span *ngSwitchDefault>ℹ</span>
-        </ng-container>
-      </span>
-      <span class="toast-message">{{ toast.message }}</span>
+  @for (toast of toasts(); track toast) {
+    <div [class]="getToastClass(toast.type)" role="status" aria-live="polite">
+      <div class="toast-content">
+        <span class="toast-icon">
+          @switch (toast.type) {
+            @case ('success') {
+              <span>✓</span>
+            }
+            @case ('error') {
+              <span>✕</span>
+            }
+            @case ('warning') {
+              <span>⚠</span>
+            }
+            @default {
+              <span>ℹ</span>
+            }
+          }
+        </span>
+        <span class="toast-message">{{ toast.message }}</span>
+      </div>
+      <button class="toast-close" (click)="removeToast(toast.id)" aria-label="Close notification">
+        ×
+      </button>
     </div>
-    <button class="toast-close" (click)="removeToast(toast.id)" aria-label="Close notification">
-      ×
-    </button>
-  </div>
+  }
 </div>

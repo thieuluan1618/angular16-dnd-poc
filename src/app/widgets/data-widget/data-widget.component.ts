@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BaseWidgetComponent } from '../../base/base-widget.component';
 import { GlobalFilterValue } from '../../models';
 
@@ -24,7 +24,7 @@ interface DataItem {
  */
 @Component({
     selector: 'app-data-widget',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './data-widget.component.html',
     styleUrls: ['./data-widget.component.scss']
 })

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BaseWidgetComponent } from '../../base/base-widget.component';
 import { GlobalFilterValue } from '../../models';
 
@@ -16,7 +16,7 @@ interface ChartDataPoint {
  */
 @Component({
     selector: 'app-chart-widget',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './chart-widget.component.html',
     styleUrls: ['./chart-widget.component.scss']
 })

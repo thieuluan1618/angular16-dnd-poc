@@ -12,19 +12,19 @@
         <button
           (click)="expandAll()"
           class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
-        >
+          >
           Expand All
         </button>
         <button
           (click)="collapseAll()"
           class="px-4 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors font-medium"
-        >
+          >
           Collapse All
         </button>
         <button
           (click)="onShowChecked()"
           class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium"
-        >
+          >
           Show Checked
         </button>
       </div>
@@ -40,35 +40,40 @@
           *matTreeNodeDef="let node"
           [node]="node"
           class="block mb-2"
-        >
+          >
           <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors">
             <!-- Expand/Collapse Button -->
-            <button
-              *ngIf="hasChild(0, node)"
-              matTreeNodeToggle
-              [attr.aria-label]="'Toggle ' + node.label"
-              class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              <svg
-                *ngIf="!treeControl.isExpanded(node)"
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-              <svg
-                *ngIf="treeControl.isExpanded(node)"
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div *ngIf="!hasChild(0, node)" class="w-6"></div>
+            @if (hasChild(0, node)) {
+              <button
+                matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.label"
+                class="w-6 h-6 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors"
+                >
+                @if (!treeControl.isExpanded(node)) {
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                }
+                @if (treeControl.isExpanded(node)) {
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                }
+              </button>
+            }
+            @if (!hasChild(0, node)) {
+              <div class="w-6"></div>
+            }
 
             <!-- Checkbox -->
             <input
@@ -77,18 +82,19 @@
               (change)="onNodeToggle(node)"
               [attr.aria-label]="node.label"
               class="w-5 h-5 text-blue-500 rounded cursor-pointer hover:text-blue-600 transition-colors"
-            />
+              />
 
             <!-- Label -->
             <span class="text-slate-700 font-medium flex-1">{{ node.label }}</span>
 
             <!-- Badge -->
-            <span
-              *ngIf="node.children"
-              class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold"
-            >
-              {{ node.children.length }}
-            </span>
+            @if (node.children) {
+              <span
+                class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold"
+                >
+                {{ node.children.length }}
+              </span>
+            }
           </div>
 
           <!-- Nested Children -->
@@ -105,17 +111,22 @@
         item(s) selected
       </p>
       <div class="text-sm text-blue-600">
-        <p *ngIf="getCheckedNodes().length === 0">
-          No items selected yet
-        </p>
-        <div *ngIf="getCheckedNodes().length > 0" class="flex flex-wrap gap-2">
-          <span
-            *ngFor="let item of getCheckedNodes()"
-            class="bg-blue-200 text-blue-900 px-3 py-1 rounded-full text-xs font-medium"
-          >
-            {{ item.label }}
-          </span>
-        </div>
+        @if (getCheckedNodes().length === 0) {
+          <p>
+            No items selected yet
+          </p>
+        }
+        @if (getCheckedNodes().length > 0) {
+          <div class="flex flex-wrap gap-2">
+            @for (item of getCheckedNodes(); track item) {
+              <span
+                class="bg-blue-200 text-blue-900 px-3 py-1 rounded-full text-xs font-medium"
+                >
+                {{ item.label }}
+              </span>
+            }
+          </div>
+        }
       </div>
     </div>
   </div>
