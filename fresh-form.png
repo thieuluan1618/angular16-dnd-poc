@@ -1,0 +1,73 @@
+uid=6_0 RootWebArea "Angular16DndPoc" url="http://localhost:4200/signal-forms"
+  uid=6_1 banner
+    uid=6_2 image "Angular 21 Logo" url="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    uid=6_3 StaticText "Angular 21 Demo"
+    uid=6_4 navigation
+      uid=6_5 link "Drag & Drop Demo" url="http://localhost:4200/"
+        uid=6_6 StaticText "🎯 Drag & Drop"
+      uid=6_7 link "Signal Forms Demo" url="http://localhost:4200/signal-forms"
+        uid=6_8 StaticText "📝 Signal Forms"
+      uid=6_9 link "Test Tree Demo" url="http://localhost:4200/test"
+        uid=6_10 StaticText "🌳 Test Tree"
+    uid=6_11 StaticText "v21.0.0"
+    uid=6_12 link "Angular on GitHub" description="View on GitHub" url="https://github.com/angular/angular"
+  uid=6_13 main
+    uid=6_14 heading "Angular 21 Signal Forms Demo" level="1"
+    uid=6_15 StaticText "Modern reactive forms using Angular 21 signals with real-time validation and state management"
+    uid=6_16 button "Switch to User Profile form demo"
+    uid=6_17 button "Switch to Contact form demo"
+    uid=6_18 main
+      uid=6_19 heading "User Profile Form" level="2"
+      uid=6_20 StaticText "Complete your profile information with our signal-based form system."
+      uid=6_21 button "Pre-fill form with sample data"
+      uid=6_22 button "Hide validation errors"
+      uid=6_23 button "Reset form to initial values"
+      uid=6_24 contentinfo
+        uid=6_25 StaticText "Fields:"
+        uid=6_26 StaticText "Required:"
+        uid=6_27 StaticText "Modified:"
+      uid=6_28 complementary
+        uid=6_29 heading "📊 Form Statistics" level="3"
+        uid=6_30 StaticText "Total Fields:"
+        uid=6_31 StaticText "8"
+        uid=6_32 StaticText "Required:"
+        uid=6_33 StaticText "6"
+        uid=6_34 StaticText "Valid:"
+        uid=6_35 StaticText "5"
+        uid=6_36 StaticText "Invalid:"
+        uid=6_37 StaticText "3"
+        uid=6_38 heading "📋 Current Form Data" level="3"
+        uid=6_39 StaticText "{
+  "firstName": "",
+  "lastName": "",
+  "email": "",
+  "age": 25,
+  "bio": "",
+  "newsletter": true,
+  "country": "us",
+  "experience": "beginner"
+}"
+    uid=6_40 heading "🚀 Angular 21 Signal Form Features" level="2"
+    uid=6_41 heading "⚡ Reactive Signals" level="3"
+    uid=6_42 StaticText "Real-time reactive updates using Angular 21's new signal system"
+    uid=6_43 heading "✅ Type-safe Validation" level="3"
+    uid=6_44 StaticText "Comprehensive validation with TypeScript support and custom validators"
+    uid=6_45 heading "🎨 Modern UI" level="3"
+    uid=6_46 StaticText "Beautiful, accessible form components with proper ARIA attributes"
+    uid=6_47 heading "🔧 Extensible" level="3"
+    uid=6_48 StaticText "Easy to extend with custom field types and validation rules"
+    uid=6_49 heading "📱 Responsive" level="3"
+    uid=6_50 StaticText "Fully responsive design that works on all device sizes"
+    uid=6_51 heading "🎯 Performance" level="3"
+    uid=6_52 StaticText "Optimized rendering with computed properties and minimal re-renders"
+  uid=6_53 contentinfo
+    uid=6_54 StaticText "Built with "
+    uid=6_55 link "Angular 21 " url="https://angular.dev/"
+      uid=6_56 StaticText "Angular 21 "
+    uid=6_57 StaticText " •  "
+    uid=6_58 link "MCP Server " url="https://angular.dev/ai/mcp"
+      uid=6_59 StaticText "MCP Server "
+    uid=6_60 StaticText " •  "
+    uid=6_61 link "GridStack.js" url="https://gridstackjs.com/"
+      uid=6_62 StaticText "GridStack.js"
+    uid=6_63 StaticText "🚀 Modern Angular Development Demo"

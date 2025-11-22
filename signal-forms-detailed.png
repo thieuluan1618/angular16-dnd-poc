@@ -1,0 +1,257 @@
+uid=8_0 RootWebArea "Angular16DndPoc" url="http://localhost:4200/signal-forms"
+  uid=8_1 ignored
+    uid=8_2 generic [selected in the DevTools Elements panel]
+      uid=8_3 banner
+        uid=8_4 ignored
+          uid=8_5 ignored
+            uid=8_6 image "Angular 21 Logo" url="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+            uid=8_7 ignored
+              uid=8_8 StaticText "Angular 21 Demo"
+                uid=8_9 InlineTextBox "Angular 21 Demo"
+          uid=8_10 navigation
+            uid=8_11 list
+              uid=8_12 listitem level="1"
+                uid=8_13 link "Drag & Drop Demo" url="http://localhost:4200/"
+                  uid=8_14 StaticText "🎯 Drag & Drop"
+                    uid=8_15 InlineTextBox "🎯 Drag & Drop"
+              uid=8_16 listitem level="1"
+                uid=8_17 link "Signal Forms Demo" url="http://localhost:4200/signal-forms"
+                  uid=8_18 StaticText "📝 Signal Forms"
+                    uid=8_19 InlineTextBox "📝 Signal Forms"
+              uid=8_20 listitem level="1"
+                uid=8_21 link "Test Tree Demo" url="http://localhost:4200/test"
+                  uid=8_22 StaticText "🌳 Test Tree"
+                    uid=8_23 InlineTextBox "🌳 Test Tree"
+          uid=8_24 ignored
+            uid=8_25 ignored
+              uid=8_26 StaticText "v21.0.0"
+                uid=8_27 InlineTextBox "v21.0.0"
+            uid=8_28 link "Angular on GitHub" description="View on GitHub" url="https://github.com/angular/angular"
+              uid=8_29 image
+      uid=8_30 main
+        uid=8_31 generic
+          uid=8_32 ignored
+            uid=8_33 sectionheader
+              uid=8_34 ignored
+                uid=8_35 heading "Angular 21 Signal Forms Demo" level="1"
+                  uid=8_36 StaticText "Angular 21 Signal Forms Demo"
+                    uid=8_37 InlineTextBox "Angular 21 Signal Forms Demo"
+                uid=8_38 paragraph
+                  uid=8_39 StaticText "Modern reactive forms using Angular 21 signals with real-time validation and state management"
+                    uid=8_40 InlineTextBox "Modern reactive forms using Angular 21 signals with real-time validation and state management"
+            uid=8_41 generic
+              uid=8_42 ignored
+                uid=8_43 button "Switch to User Profile form demo"
+                  uid=8_44 StaticText "👤 User Profile"
+                    uid=8_45 InlineTextBox "👤 User Profile"
+                uid=8_46 button "Switch to Contact form demo"
+                  uid=8_47 StaticText "📧 Contact Form"
+                    uid=8_48 InlineTextBox "📧 Contact Form"
+            uid=8_49 main
+              uid=8_50 ignored
+                uid=8_51 generic
+                  uid=8_52 ignored
+                    uid=8_53 heading "User Profile Form" level="2"
+                      uid=8_54 StaticText "User Profile Form"
+                        uid=8_55 InlineTextBox "User Profile Form"
+                    uid=8_56 paragraph
+                      uid=8_57 StaticText "Complete your profile information with our signal-based form system."
+                        uid=8_58 InlineTextBox "Complete your profile information with our signal-based form system."
+                  uid=8_59 ignored
+                    uid=8_60 button "Pre-fill form with sample data"
+                      uid=8_61 StaticText "🎯 Pre-fill Sample Data"
+                        uid=8_62 InlineTextBox "🎯 Pre-fill Sample Data"
+                    uid=8_63 button "Show validation errors"
+                      uid=8_64 StaticText "👁️ Show Errors"
+                        uid=8_65 InlineTextBox "👁️ Show Errors"
+                    uid=8_66 button "Reset form to initial values"
+                      uid=8_67 StaticText "🔄 Reset Form"
+                        uid=8_68 InlineTextBox "🔄 Reset Form"
+                  uid=8_69 generic
+                    uid=8_70 ignored
+                      uid=8_71 ignored
+                    uid=8_72 ignored
+                      uid=8_73 ignored
+                    uid=8_74 ignored
+                      uid=8_75 ignored
+                    uid=8_76 ignored
+                      uid=8_77 ignored
+                    uid=8_78 ignored
+                      uid=8_79 ignored
+                    uid=8_80 ignored
+                      uid=8_81 ignored
+                    uid=8_82 ignored
+                      uid=8_83 ignored
+                    uid=8_84 ignored
+                      uid=8_85 ignored
+                    uid=8_86 ignored
+                      uid=8_87 status
+                      uid=8_88 contentinfo
+                        uid=8_89 ignored
+                          uid=8_90 ignored
+                            uid=8_91 StaticText "Fields:"
+                              uid=8_92 InlineTextBox "Fields:"
+                          uid=8_93 ignored
+                        uid=8_94 ignored
+                          uid=8_95 ignored
+                            uid=8_96 StaticText "Required:"
+                              uid=8_97 InlineTextBox "Required:"
+                          uid=8_98 ignored
+                        uid=8_99 ignored
+                          uid=8_100 ignored
+                            uid=8_101 StaticText "Modified:"
+                              uid=8_102 InlineTextBox "Modified:"
+                          uid=8_103 ignored
+                uid=8_104 complementary
+                  uid=8_105 ignored
+                    uid=8_106 heading "📊 Form Statistics" level="3"
+                      uid=8_107 StaticText "📊 Form Statistics"
+                        uid=8_108 InlineTextBox "📊 Form Statistics"
+                    uid=8_109 ignored
+                      uid=8_110 ignored
+                        uid=8_111 ignored
+                          uid=8_112 StaticText "Total Fields:"
+                            uid=8_113 InlineTextBox "Total Fields:"
+                        uid=8_114 ignored
+                          uid=8_115 StaticText "8"
+                            uid=8_116 InlineTextBox "8"
+                      uid=8_117 ignored
+                        uid=8_118 ignored
+                          uid=8_119 StaticText "Required:"
+                            uid=8_120 InlineTextBox "Required:"
+                        uid=8_121 ignored
+                          uid=8_122 StaticText "6"
+                            uid=8_123 InlineTextBox "6"
+                      uid=8_124 ignored
+                        uid=8_125 ignored
+                          uid=8_126 StaticText "Valid:"
+                            uid=8_127 InlineTextBox "Valid:"
+                        uid=8_128 ignored
+                          uid=8_129 StaticText "5"
+                            uid=8_130 InlineTextBox "5"
+                      uid=8_131 ignored
+                        uid=8_132 ignored
+                          uid=8_133 StaticText "Invalid:"
+                            uid=8_134 InlineTextBox "Invalid:"
+                        uid=8_135 ignored
+                          uid=8_136 StaticText "3"
+                            uid=8_137 InlineTextBox "3"
+                  uid=8_138 ignored
+                    uid=8_139 heading "📋 Current Form Data" level="3"
+                      uid=8_140 StaticText "📋 Current Form Data"
+                        uid=8_141 InlineTextBox "📋 Current Form Data"
+                    uid=8_142 generic
+                      uid=8_143 StaticText "{
+  "firstName": "",
+  "lastName": "",
+  "email": "",
+  "age": 25,
+  "bio": "",
+  "newsletter": true,
+  "country": "us",
+  "experience": "beginner"
+}"
+                        uid=8_144 InlineTextBox "{"
+                        uid=8_145 InlineTextBox "
+"
+                        uid=8_146 InlineTextBox "  "firstName": "","
+                        uid=8_147 InlineTextBox "
+"
+                        uid=8_148 InlineTextBox "  "lastName": "","
+                        uid=8_149 InlineTextBox "
+"
+                        uid=8_150 InlineTextBox "  "email": "","
+                        uid=8_151 InlineTextBox "
+"
+                        uid=8_152 InlineTextBox "  "age": 25,"
+                        uid=8_153 InlineTextBox "
+"
+                        uid=8_154 InlineTextBox "  "bio": "","
+                        uid=8_155 InlineTextBox "
+"
+                        uid=8_156 InlineTextBox "  "newsletter": true,"
+                        uid=8_157 InlineTextBox "
+"
+                        uid=8_158 InlineTextBox "  "country": "us","
+                        uid=8_159 InlineTextBox "
+"
+                        uid=8_160 InlineTextBox "  "experience": "beginner""
+                        uid=8_161 InlineTextBox "
+"
+                        uid=8_162 InlineTextBox "}"
+            uid=8_163 generic
+              uid=8_164 ignored
+                uid=8_165 heading "🚀 Angular 21 Signal Form Features" level="2"
+                  uid=8_166 StaticText "🚀 Angular 21 Signal Form Features"
+                    uid=8_167 InlineTextBox "🚀 Angular 21 Signal Form Features"
+                uid=8_168 ignored
+                  uid=8_169 ignored
+                    uid=8_170 heading "⚡ Reactive Signals" level="3"
+                      uid=8_171 StaticText "⚡ Reactive Signals"
+                        uid=8_172 InlineTextBox "⚡ Reactive Signals"
+                    uid=8_173 paragraph
+                      uid=8_174 StaticText "Real-time reactive updates using Angular 21's new signal system"
+                        uid=8_175 InlineTextBox "Real-time reactive updates using Angular "
+                        uid=8_176 InlineTextBox "21's new signal system"
+                  uid=8_177 ignored
+                    uid=8_178 heading "✅ Type-safe Validation" level="3"
+                      uid=8_179 StaticText "✅ Type-safe Validation"
+                        uid=8_180 InlineTextBox "✅ Type-safe Validation"
+                    uid=8_181 paragraph
+                      uid=8_182 StaticText "Comprehensive validation with TypeScript support and custom validators"
+                        uid=8_183 InlineTextBox "Comprehensive validation with "
+                        uid=8_184 InlineTextBox "TypeScript support and custom validators"
+                  uid=8_185 ignored
+                    uid=8_186 heading "🎨 Modern UI" level="3"
+                      uid=8_187 StaticText "🎨 Modern UI"
+                        uid=8_188 InlineTextBox "🎨 Modern UI"
+                    uid=8_189 paragraph
+                      uid=8_190 StaticText "Beautiful, accessible form components with proper ARIA attributes"
+                        uid=8_191 InlineTextBox "Beautiful, accessible form components "
+                        uid=8_192 InlineTextBox "with proper ARIA attributes"
+                  uid=8_193 ignored
+                    uid=8_194 heading "🔧 Extensible" level="3"
+                      uid=8_195 StaticText "🔧 Extensible"
+                        uid=8_196 InlineTextBox "🔧 Extensible"
+                    uid=8_197 paragraph
+                      uid=8_198 StaticText "Easy to extend with custom field types and validation rules"
+                        uid=8_199 InlineTextBox "Easy to extend with custom field types "
+                        uid=8_200 InlineTextBox "and validation rules"
+                  uid=8_201 ignored
+                    uid=8_202 heading "📱 Responsive" level="3"
+                      uid=8_203 StaticText "📱 Responsive"
+                        uid=8_204 InlineTextBox "📱 Responsive"
+                    uid=8_205 paragraph
+                      uid=8_206 StaticText "Fully responsive design that works on all device sizes"
+                        uid=8_207 InlineTextBox "Fully responsive design that works on all "
+                        uid=8_208 InlineTextBox "device sizes"
+                  uid=8_209 ignored
+                    uid=8_210 heading "🎯 Performance" level="3"
+                      uid=8_211 StaticText "🎯 Performance"
+                        uid=8_212 InlineTextBox "🎯 Performance"
+                    uid=8_213 paragraph
+                      uid=8_214 StaticText "Optimized rendering with computed properties and minimal re-renders"
+                        uid=8_215 InlineTextBox "Optimized rendering with computed "
+                        uid=8_216 InlineTextBox "properties and minimal re-renders"
+      uid=8_217 contentinfo
+        uid=8_218 ignored
+          uid=8_219 ignored
+            uid=8_220 paragraph
+              uid=8_221 StaticText "Built with "
+                uid=8_222 InlineTextBox "Built with "
+              uid=8_223 link "Angular 21 " url="https://angular.dev/"
+                uid=8_224 StaticText "Angular 21 "
+                  uid=8_225 InlineTextBox "Angular 21 "
+              uid=8_226 StaticText " •  "
+                uid=8_227 InlineTextBox " •  "
+              uid=8_228 link "MCP Server " url="https://angular.dev/ai/mcp"
+                uid=8_229 StaticText "MCP Server "
+                  uid=8_230 InlineTextBox "MCP Server "
+              uid=8_231 StaticText " •  "
+                uid=8_232 InlineTextBox " •  "
+              uid=8_233 link "GridStack.js" url="https://gridstackjs.com/"
+                uid=8_234 StaticText "GridStack.js"
+                  uid=8_235 InlineTextBox "GridStack.js"
+            uid=8_236 paragraph
+              uid=8_237 StaticText "🚀 Modern Angular Development Demo"
+                uid=8_238 InlineTextBox "🚀 Modern Angular Development Demo"
